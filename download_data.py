@@ -29,62 +29,62 @@ RESOURCES_MAP = {
         "original_ext": ".tsv",
         "desc": "Entire wikipedia passages set obtain by splitting all pages into 100-word segments (no overlap)"
     },
-    "data.gold_passages_info.topiocqa_all_history_train": {
+    "data.gold_passages_info.all_history.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_all_history_train.json",
         "original_ext": ".json",
         "desc": "Gold passages info for all train passages",
     },
-    "data.gold_passages_info.topiocqa_all_history_dev": {
+    "data.gold_passages_info.all_history.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_all_history_dev.json",
         "original_ext": ".json",
         "desc": "Gold passages info for all dev passages",
     },
-    "data.gold_passages_info.topiocqa_original_train": {
+    "data.gold_passages_info.original.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_original_train.json",
         "original_ext": ".json",
         "desc": "Gold passages info for original train passages",
     },
-    "data.gold_passages_info.topiocqa_original_dev": {
+    "data.gold_passages_info.original.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_original_dev.json",
         "original_ext": ".json",
         "desc": "Gold passages info for original dev passages",
     },
-    "data.gold_passages_info.topiocqa_rewrites_t5_qrecc_train": {
+    "data.gold_passages_info.rewrites_t5_qrecc.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_rewrites_t5_qrecc_train.json",
         "original_ext": ".json",
         "desc": "Gold passages info for rewrites train passages",
     },
-    "data.gold_passages_info.topiocqa_rewrites_t5_qrecc_dev": {
+    "data.gold_passages_info.rewrites_t5_qrecc.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
         "desc": "Gold passages info for rewrites dev passages",
     },
-    "data.retriever.topiocqa_all_history_retriever_train": {
+    "data.retriever.all_history.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_all_history_retriever_train.json",
         "original_ext": ".json",
         "desc": "Retriever passages info for all train passages",
     },
-    "data.retriever.topiocqa_all_history_retriever_dev": {
+    "data.retriever.all_history.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_all_history_retriever_dev.json",
         "original_ext": ".json",
         "desc": "Retriever passages info for all dev passages",
     },
-    "data.retriever.topiocqa_original_retriever_train": {
+    "data.retriever.original.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_original_retriever_train.json",
         "original_ext": ".json",
         "desc": "Retriever passages info for original train passages",
     },
-    "data.retriever.topiocqa_original_retriever_dev": {
+    "data.retriever.original.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_original_retriever_dev.json",
         "original_ext": ".json",
         "desc": "Retriever passages info for original dev passages",
     },
-    "data.retriever.topiocqa_rewrites_t5_qrecc_retriever_train": {
+    "data.retriever.rewrites_t5_qrecc.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_rewrites_t5_qrecc_retriever_train.json",
         "original_ext": ".json",
         "desc": "Retriever passages info for rewrites train passages",
     },
-    "data.retriever.topiocqa_rewrites_t5_qrecc_retriever_dev": {
+    "data.retriever.rewrites_t5_qrecc.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_rewrites_t5_qrecc_retriever_dev.json",
         "original_ext": ".json",
         "desc": "Retriever passages info for rewrites dev passages",
@@ -128,152 +128,152 @@ RESOURCES_MAP = {
         "original_ext": ".pt",
         "desc": "Retriever DPR model checkpoints for rewrites passages",
     },
-    "model_checkpoints.reader.dpr_retriever.all_history": {
+    "model_checkpoints.reader.dpr_reader.dpr_retriever.all_history": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_retriever/dpr_reader_all_history",
         "original_ext": ".pt",
         "desc": "Reader DPR model checkpoints for all history passages",
     },
-    "model_checkpoints.reader.dpr_retriever.original": {
+    "model_checkpoints.reader.dpr_reader.dpr_retriever.original": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_retriever/dpr_reader_original",
         "original_ext": ".pt",
         "desc": "Reader DPR model checkpoints for original passages",
     },
-    "model_checkpoints.reader.dpr_retriever.rewrites_t5_qrecc": {
+    "model_checkpoints.reader.dpr_reader.dpr_retriever.rewrites_t5_qrecc": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_retriever/dpr_reader_rewrites_t5_qrecc",
         "original_ext": ".pt",
         "desc": "Reader DPR model checkpoints for rewrites passages",
     },
-    "model_checkpoints.reader.bm25_retriever.all_history": {
+    "model_checkpoints.reader.dpr_reader.bm25_retriever.all_history": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/bm25_retriever/dpr_reader_all_history",
         "original_ext": ".pt",
         "desc": "Reader BM25 model checkpoints for all history passages",
     },
-    "model_checkpoints.reader.bm25_retriever.original": {
+    "model_checkpoints.reader.dpr_reader.bm25_retriever.original": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/bm25_retriever/dpr_reader_original",
         "original_ext": ".pt",
         "desc": "Reader BM25 model checkpoints for original passages",
     },
-    "model_checkpoints.reader.bm25_retriever.rewrites_t5_qrecc": {
+    "model_checkpoints.reader.dpr_reader.bm25_retriever.rewrites_t5_qrecc": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/bm25_retriever/dpr_reader_rewrites_t5_qrecc",
         "original_ext": ".pt",
         "desc": "Reader BM25 model checkpoints for rewrites passages",
     },
-    "results.retriever.dpr.all_history_train": {
+    "results.retriever.dpr.all_history.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_all_history_train.json",
         "original_ext": ".json",
         "desc": "Retriever DPR results for all history passages",
     },
-    "results.retriever.dpr.all_history_dev": {
+    "results.retriever.dpr.all_history.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_all_history_dev.json",
         "original_ext": ".json",
         "desc": "Retriever DPR results for all history passages",
     },
-    "results.retriever.dpr.original_train": {
+    "results.retriever.dpr.original.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_original_train.json",
         "original_ext": ".json",
         "desc": "Retriever DPR results for original passages",
     },
-    "results.retriever.dpr.original_dev": {
+    "results.retriever.dpr.original.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_original_dev.json",
         "original_ext": ".json",
         "desc": "Retriever DPR results for original passages",
     },
-    "results.retriever.dpr.rewrites_t5_qrecc_train": {
+    "results.retriever.dpr.rewrites_t5_qrecc.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_rewrites_t5_qrecc_train.json",
         "original_ext": ".json",
         "desc": "Retriever DPR results for rewrites passages",
     },
-    "results.retriever.dpr.rewrites_t5_qrecc_dev": {
+    "results.retriever.dpr.rewrites_t5_qrecc.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
         "desc": "Retriever DPR results for rewrites passages",
     },
-    "results.retriever.bm25.all_history_train": {
+    "results.retriever.bm25.all_history.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_all_history_train.json",
         "original_ext": ".json",
         "desc": "Retriever BM25 results for all history passages",
     },
-    "results.retriever.bm25.all_history_dev": {
+    "results.retriever.bm25.all_history.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_all_history_dev.json",
         "original_ext": ".json",
         "desc": "Retriever BM25 results for all history passages",
     },
-    "results.retriever.bm25.original_train": {
+    "results.retriever.bm25.original.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_original_train.json",
         "original_ext": ".json",
         "desc": "Retriever BM25 results for original passages",
     },
-    "results.retriever.bm25.original_dev": {
+    "results.retriever.bm25.original.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_original_dev.json",
         "original_ext": ".json",
         "desc": "Retriever BM25 results for original passages",
     },
-    "results.retriever.bm25.rewrites_t5_qrecc_train": {
+    "results.retriever.bm25.rewrites_t5_qrecc.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_rewrites_t5_qrecc_train.json",
         "original_ext": ".json",
         "desc": "Retriever BM25 results for rewrites passages",
     },
-    "results.retriever.bm25.rewrites_t5_qrecc_dev": {
+    "results.retriever.bm25.rewrites_t5_qrecc.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
         "desc": "Retriever BM25 results for rewrites passages",
     },
-    "results.reader.dpr_retriever.all_history_train": {
+    "results.reader.dpr_reader.dpr_retriever.all_history.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_all_history_train.json",
         "original_ext": ".json",
         "desc": "Reader DPR Retriever results for all history passages",
     },
-    "results.reader.dpr_retriever.all_history_dev": {
+    "results.reader.dpr_reader.dpr_retriever.all_history.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_all_history_dev.json",
         "original_ext": ".json",
         "desc": "Reader DPR Retriever results for all history passages",
     },
-    "results.reader.dpr_retriever.original_train": {
+    "results.reader.dpr_reader.dpr_retriever.original.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_original_train.json",
         "original_ext": ".json",
         "desc": "Reader DPR Retriever results for original passages",
     },
-    "results.reader.dpr_retriever.original_dev": {
+    "results.reader.dpr_reader.dpr_retriever.original.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_original_dev.json",
         "original_ext": ".json",
         "desc": "Reader DPR Retriever results for original passages",
     },
-    "results.reader.dpr_retriever.rewrites_t5_qrecc_train": {
+    "results.reader.dpr_reader.dpr_retriever.rewrites_t5_qrecc.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_rewrites_t5_qrecc_train.json",
         "original_ext": ".json",
         "desc": "Reader DPR Retriever results for rewrites passages",
     },
-    "results.reader.dpr_retriever.rewrites_t5_qrecc_dev": {
+    "results.reader.dpr_reader.dpr_retriever.rewrites_t5_qrecc.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
         "desc": "Reader DPR Retriever results for rewrites passages",
     },
-    "results.reader.bm25_retriever.all_history_train": {
+    "results.reader.dpr_reader.bm25_retriever.all_history.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_all_history_train.json",
         "original_ext": ".json",
         "desc": "Reader BM25 Retriever results for all history passages",
     },
-    "results.reader.bm25_retriever.all_history_dev": {
+    "results.reader.dpr_reader.bm25_retriever.all_history.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_all_history_dev.json",
         "original_ext": ".json",
         "desc": "Reader BM25 Retriever results for all history passages",
     },
-    "results.reader.bm25_retriever.original_train": {
+    "results.reader.dpr_reader.bm25_retriever.original.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_original_train.json",
         "original_ext": ".json",
         "desc": "Reader BM25 Retriever results for original passages",
     },
-    "results.reader.bm25_retriever.original_dev": {
+    "results.reader.dpr_reader.bm25_retriever.original.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_original_dev.json",
         "original_ext": ".json",
         "desc": "Reader BM25 Retriever results for original passages",
     },
-    "results.reader.bm25_retriever.rewrites_t5_qrecc_train": {
+    "results.reader.dpr_reader.bm25_retriever.rewrites_t5_qrecc.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_rewrites_t5_qrecc_train.json",
         "original_ext": ".json",
         "desc": "Reader BM25 Retriever results for rewrites passages",
     },
-    "results.reader.bm25_retriever.rewrites_t5_qrecc_dev": {
+    "results.reader.dpr_reader.bm25_retriever.rewrites_t5_qrecc.dev": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
         "desc": "Reader BM25 Retriever results for rewrites passages",
@@ -385,7 +385,7 @@ def main():
     else:
         print("Please specify resource value. Possible options are:")
         for k, v in RESOURCES_MAP.items():
-            print("Resource key=%s  :  %s", k, v["desc"])
+            print(f"Resource key={k}  :  {v['desc']}")
 
 
 if __name__ == "__main__":
