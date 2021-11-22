@@ -2,24 +2,63 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<style>
+  .reload {
+    font-family: Lucida Sans Unicode
+  }
+</style>
 <script>
   // on ducment load call AJAX to get the data
-  $(document).ready(function() {
+  function strToHTML(str) {
+    //string to JSON
+    var obj = JSON.parse(str);
+    var htmlString = "";
+    //loop through the JSON object
+    for (var i = 0; i < obj.length; i++) {
+      var isUnanswerbale = obj[i]["Answer"] == "UNANSWERABLE"
+      htmlString += "<b>Question " + (i+1).toString() + ":</b> " + obj[i]["Question"] + "<br>";
+      if (!isUnanswerbale){
+        htmlString += "<b>Rationale :</b> <i>" + obj[i]["Rationale"].substring(0, 100);
+          if (obj[i]["Rationale"].length > 100) {
+            htmlString += "... "
+            // htmlString += "<a href='#' class='show-more' data-toggle='modal' data-target='#rationaleModal" + (i+1).toString() + "'>Show More</a>"
+          }
+        htmlString += "</i><br>";
+        // htmlString += "<div id='rationaleModal" + (i+1).toString() + "' class='modal fade' tabindex='-1' role='dialog' aria-labelledby='rationaleModal" + (i+1).toString() + "' aria-hidden='true'>"
+        // htmlString += "<p>testing</p>"
+        // htmlString += "</div>"
+      }
+      htmlString += "<b>Answer " + (i+1).toString() + ":</b> " + obj[i]["Answer"] + "<br>";
+      if (!isUnanswerbale){
+        var hrefLink = "https://en.wikipedia.org/wiki/" + obj[i]["Topic"].replaceAll(" ", "_");
+        if (obj[i]["Topic_section"] != "Introduction")
+          hrefLink += "#" + obj[i]["Topic_section"].replaceAll(" ", "_");
+        htmlString += "<b>Web Page :</b> <i>" + "<a href='" + hrefLink + "' target='_blank'>" + obj[i]["Topic"] + " (" + obj[i]["Topic_section"] + ")</a></i><br>";
+        }
+      htmlString += "<br>";
+    }
+
+    return htmlString;
+  }
+  function getConversation() {
     console.log("ready!");
     $.ajax({
-      // headers: {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json',
-      //   'Access-Control-Allow-Origin': '*',
-      //   'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Origin'
-      // },
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
       type: 'GET',
       dataType: 'json',
       url: 'https://5du8ytlzg9.execute-api.us-east-2.amazonaws.com/default/topiocqaGetExample',
       success: function(data) {
-        console.log(data);
+        console.log(data["body"]);
+        $("#datasetExplorer").html(strToHTML(data["body"]));
       }
     });
+  }
+  $(document).ready(function() {
+    getConversation();
   });
 </script>
 <html lang="{{ site.lang | default: "en-US" }}">
@@ -45,15 +84,17 @@
         <a href="https://arxiv.org/pdf/2110.00768.pdf" class="btn">View paper on arxiv</a>
       {% endif %}
       <a href="https://mcgill-nlp.github.io/topiocqa/topiocqa.zip" class="btn">Download dataset</a>
+      <a href="https://github.com/McGill-NLP/topiocqa" class="btn">View code on GitHub</a>
       {% if site.show_downloads %}
         <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
       {% endif %}
     </header>
 
     <main id="content" class="main-content" role="main">
-      <h1 class="dataset-explorer">Dataset Explorer</h1>
-      <!-- <div class="dataset-explorer-container col-md-12" id="dataset-explorer">
-      </div> -->
+      <h1 class="dataset-explorer">Dataset Explorer <button style="background-color: white; border: 0px;"><span onclick="getConversation()" class=reload>&#x21bb;</span></button></h1>
+      <div class="dataset-explorer-container col-md-12" id="datasetExplorer" style="background-color: whitesmoke; padding: 2em;">
+        <p>Loading...</p>
+      </div>
       {{ content }}
 
       <footer class="site-footer">
