@@ -3,6 +3,7 @@ import csv
 import glob
 import logging
 import os
+import sys
 import random
 from typing import Dict, List, Tuple
 
@@ -113,11 +114,10 @@ class Dataset(torch.utils.data.Dataset):
 def get_dpr_files(source_name) -> List[str]:
     if os.path.exists(source_name) or glob.glob(source_name):
         return glob.glob(source_name)
+    elif os.path.exists(os.path.join(sys.path[0] + "/..", source_name)) or glob.glob(os.path.join(sys.path[0] + "/..", source_name)):
+        return glob.glob(os.path.join(sys.path[0]  + "/..", source_name))
     else:
-        # try to use data downloader
-        from dpr.data.download_data import download
-
-        return download(source_name)
+        return []
 
 
 class JsonQADataset(Dataset):

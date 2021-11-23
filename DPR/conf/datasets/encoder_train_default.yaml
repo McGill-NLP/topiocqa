@@ -2,25 +2,25 @@
 
 topiocqa_train_rewrites_t5_qrecc:
   _target_: dpr.data.biencoder_data.JsonQADataset
-  file: downloads/data/retriever/topiocqa/rewrites_t5_qrecc/train.json
+  file: downloads/data/retriever/rewrites_t5_qrecc/train.json
 
 topiocqa_dev_rewrites_t5_qrecc:
   _target_: dpr.data.biencoder_data.JsonQADataset
-  file: downloads/data/retriever/topiocqa/rewrites_t5_qrecc/dev.json
+  file: downloads/data/retriever/rewrites_t5_qrecc/dev.json
 
 topiocqa_train_original:
   _target_: dpr.data.biencoder_data.JsonQADataset
-  file: downloads/data/retriever/topiocqa/original/train.json
+  file: downloads/data/retriever/original/train.json
 
 topiocqa_dev_original:
   _target_: dpr.data.biencoder_data.JsonQADataset
-  file: downloads/data/retriever/topiocqa/original/dev.json
+  file: downloads/data/retriever/original/dev.json
 
 topiocqa_train_all_history:
   _target_: dpr.data.biencoder_data.JsonQADataset
-  file: downloads/data/retriever/topiocqa/all_history/train.json
+  file: downloads/data/retriever/all_history/train.json
 
 topiocqa_dev_all_history:
   _target_: dpr.data.biencoder_data.JsonQADataset
-  file: downloads/data/retriever/topiocqa/all_history/dev.json
+  file: downloads/data/retriever/all_history/dev.json
 
