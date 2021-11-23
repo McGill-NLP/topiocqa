@@ -63,8 +63,6 @@ ReaderQuestionPredictions = collections.namedtuple(
     "ReaderQuestionPredictions", ["id", "predictions", "gold_answers"]
 )
 
-import wandb
-
 class ReaderTrainer(object):
     def __init__(self, cfg: DictConfig):
         self.cfg = cfg
@@ -93,8 +91,6 @@ class ReaderTrainer(object):
             cfg.fp16,
             cfg.fp16_opt_level,
         )
-        if cfg.local_rank in [-1, 0]:
-            wandb.watch(reader, log_freq=100)
         self.reader = reader
         self.optimizer = optimizer
         self.tensorizer = tensorizer
@@ -295,8 +291,6 @@ class ReaderTrainer(object):
         for n in sorted(ems.keys()):
             em = np.mean(ems[n])
             logger.info("n=%d\tEM %.2f" % (n, em * 100))
-            if cfg.local_rank in [-1, 0]:
-                wandb.log({"em_" + str(n): em * 100})
 
         if cfg.prediction_results_file:
             os.makedirs(os.path.dirname(cfg.prediction_results_file), exist_ok=True)
@@ -345,8 +339,6 @@ class ReaderTrainer(object):
             )
 
             loss = self._calc_loss(input)
-            if cfg.local_rank in [-1, 0]:
-                wandb.log({"loss": loss.item()})
 
             epoch_loss += loss.item()
             rolling_train_loss += loss.item()
@@ -393,8 +385,6 @@ class ReaderTrainer(object):
                     rolling_loss_step,
                     latest_rolling_train_av_loss,
                 )
-                if cfg.local_rank in [-1, 0]:
-                    wandb.log({"latest_rolling_train_av_loss": latest_rolling_train_av_loss})
                 rolling_train_loss = 0.0
 
             if global_step % eval_step == 0:
@@ -410,8 +400,6 @@ class ReaderTrainer(object):
                 self.reader.train()
 
         epoch_loss = (epoch_loss / epoch_batches) if epoch_batches > 0 else 0
-        if cfg.local_rank in [-1, 0]:
-            wandb.log({"epoch_loss": epoch_loss})
         logger.info("Av Loss per epoch=%f", epoch_loss)
         return global_step
 
@@ -621,9 +609,6 @@ def main(cfg: DictConfig):
     if cfg.local_rank in [-1, 0]:
         logger.info("CFG (after gpu  configuration):")
         logger.info("%s", OmegaConf.to_yaml(cfg))
-        wandb.init(project="dpr-reader")
-
-        wandb.config.update(cfg)
 
     trainer = ReaderTrainer(cfg)
 
