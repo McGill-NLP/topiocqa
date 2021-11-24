@@ -54,6 +54,8 @@
       success: function(data) {
         console.log(data["body"]);
         $("#datasetExplorer").html(strToHTML(data["body"]));
+      }, error: function(data) {
+        $("#datasetExplorer").html("<p>Failed to load conversation, please try after some time.</p>");
       }
     });
   }
@@ -81,9 +83,9 @@
 
     <header class="page-header" role="banner" style="background-image: linear-gradient(120deg, #d7816a, #bd4f6c);">
       <h2 class="project-name"><img src="topiocqa_no_background.png" alt="logo" width="100" height="100" style="margin-bottom: -20px;"/>TopiOCQA: Open-domain Conversational Question Answering with Topic Switching</h2>
-      <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
+      <h2 class="project-tagline">Vaibhav Adlakha, Shehzaad Dhuliawala, Kaheer Suleman, Harm de Vries, Siva Reddy</h2>
       {% if site.github.is_project_page %}
-        <a href="https://arxiv.org/pdf/2110.00768.pdf" class="btn">View paper on arxiv</a>
+        <a href="https://arxiv.org/abs/2110.00768" class="btn">View paper on arXiv</a>
       {% endif %}
       <a href="https://github.com/McGill-NLP/topiocqa" class="btn">View code on GitHub</a>
       <a href="https://mcgill-nlp.github.io/topiocqa/topiocqa.zip" class="btn">Download dataset</a>
@@ -93,6 +95,9 @@
     </header>
 
     <main id="content" class="main-content" role="main">
+      <h1 class="dataset-explorer" style="color: #d7816a;">Overview</h1>
+        <p>We introduce a new information-seeking conversational dataset with challenging topic switching phenomenons, and evaluate state-of-the-art QA models on it. </p>
+        <p>The paper is available on <a href="https://arxiv.org/abs/2110.00768">arXiv</a> and the code to replicate the experiments can be found on <a href="https://github.com/McGill-NLP/topiocqa">GitHub</a>. The dataset can be downloaded from <a href="https://mcgill-nlp.github.io/topiocqa/topiocqa.zip">here</a>. The interactive demo below loads a random conversation from the training set.</p>
       <h1 class="dataset-explorer" style="color: #d7816a;">Dataset Explorer <button style="background-color: white; border: 0px;"><span onclick="getConversation()" class=reload>&#x21bb;</span></button></h1>
       <div class="dataset-explorer-container col-md-12" id="datasetExplorer" style="background-image: linear-gradient(120deg, #fbece8, #f8cad6); padding: 2em;">
         <p>Loading...</p>
