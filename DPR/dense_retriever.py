@@ -237,7 +237,7 @@ def save_results(
                 ],
             }
         )
-    os.mmakedirs(os.path.dirname(out_file), exist_ok=True)
+    os.makedirs(os.path.dirname(out_file), exist_ok=True)
     with open(out_file, "w") as writer:
         writer.write(json.dumps(merged_data, indent=4) + "\n")
     logger.info("Saved results * scores  to %s", out_file)
