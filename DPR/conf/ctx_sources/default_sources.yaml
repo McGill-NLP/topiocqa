@@ -2,5 +2,5 @@
 
 dpr_wiki_topiocqa:
   _target_: dpr.data.retriever_data.CsvCtxSrc
-  file: data.wikipedia_split.topiocqa.full_wiki_segments.tsv
+  file: downloads/data/wikipedia_split/full_wiki_segments.tsv
   id_prefix: 'wiki:'

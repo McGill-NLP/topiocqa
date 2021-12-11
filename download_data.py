@@ -89,6 +89,36 @@ RESOURCES_MAP = {
         "original_ext": ".json",
         "desc": "Retriever passages info for rewrites dev passages",
     },
+    "data.retriever.qas.all_history.train": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_all_history_retriever_train.csv",
+        "original_ext": ".csv",
+        "desc": "Retriever passages info for all train passages",
+    },
+    "data.retriever.qas.all_history.dev": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_all_history_retriever_dev.csv",
+        "original_ext": ".csv",
+        "desc": "Retriever passages info for all dev passages",
+    },
+    "data.retriever.qas.original.train": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_original_retriever_train.csv",
+        "original_ext": ".csv",
+        "desc": "Retriever passages info for original train passages",
+    },
+    "data.retriever.qas.original.dev": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_original_retriever_dev.csv",
+        "original_ext": ".csv",
+        "desc": "Retriever passages info for original dev passages",
+    },
+    "data.retriever.qas.rewrites_t5_qrecc.train": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_rewrites_t5_qrecc_retriever_train.csv",
+        "original_ext": ".csv",
+        "desc": "Retriever passages info for rewrites train passages",
+    },
+    "data.retriever.qas.rewrites_t5_qrecc.dev": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_rewrites_t5_qrecc_retriever_dev.csv",
+        "original_ext": ".csv",
+        "desc": "Retriever passages info for rewrites dev passages",
+    },
     "passage_embeddings.all_history.wikipedia_passages": {
         "s3_url": [
             "https://topiocqa.s3.us-east-2.amazonaws.com/passage_embeddings/all_history/wikipedia_passages_{}.pkl".format(i)
