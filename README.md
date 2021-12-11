@@ -135,7 +135,7 @@ The output file with the retrieved results has the following format:
      },
 ]
 ```
-Retrieval inference for DPR is computationally expensive as it builds an in-memory index of the entire corpus. For our corpus (~25.7 million passages), the peak RAM consumption was 130GB. The GPU infrastucture used for inference was 4 x 16GB V100 GPU machines. The results from retrieval inference can also be downloaded by using `results.retriever.dpr.all_history` as the resource key.
+Retrieval inference for DPR is computationally expensive as it builds an in-memory index of the entire corpus. For our corpus (~25.7 million passages), the peak RAM consumption was 148GB. The GPU infrastucture used for inference was 4 x 16GB V100 GPU machines. The results from retrieval inference can also be downloaded by using `results.retriever.dpr.all_history` as the resource key.
 
 DPR inference procedure evaluates by checking the presence of answer span in the retrieved passage. This is sub-optimal for TopiOCQA as it is an abstractive question-answering dataset, therefore the answer span may not be present in any passage. TopiOCQA provides the gold question-passage pairs which can be used for evaluation. Given the retriever inference results, the evaluation metrics can be computed by using the following command:
 ```
