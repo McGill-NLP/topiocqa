@@ -327,12 +327,13 @@ def preprocess_retriever_data(
         # for some reason, only this training example was facing an issue
         if question == 'product recall is an episode from which series':
             question = '"product recall" is an episode from which series'
-        if question not in canonical_questions:
+        if is_train_set and question not in canonical_questions:
             logger.info("Question not found in canonical questions: %s", question)
             assert False
         # if question in canonical_questions:
-        question = canonical_questions[question]
-        assert question == canonical_questions[question]
+        if is_train_set:
+            question = canonical_questions[question]
+            assert question == canonical_questions[question]
 
         positive_passages, negative_passages = _select_reader_passages(
             sample,
