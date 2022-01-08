@@ -583,8 +583,9 @@ def _select_reader_passages(
         )[0:max_positives]
 
     # optionally include gold passage itself if it is still not in the positives list
-    assert question in gold_passage_map
+    
     if include_gold_passage:
+        assert question in gold_passage_map
         gold_passage = gold_passage_map[question]
         included_gold_passage = next(
             iter(ctx for ctx in selected_positive_ctxs if ctx.id == gold_passage.id),
