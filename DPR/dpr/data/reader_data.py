@@ -242,7 +242,7 @@ DEFAULT_PREPROCESSING_CFG_TRAIN = ReaderPreprocessingCfg(
     extra_text="",
 )
 
-OCOQA_PREPROCESSING_CFG_TRAIN = ReaderPreprocessingCfg(
+TOPIOCQA_PREPROCESSING_CFG_TRAIN = ReaderPreprocessingCfg(
     use_tailing_sep=False,
     skip_no_positves=True,
     include_gold_passage=True,
@@ -254,7 +254,7 @@ OCOQA_PREPROCESSING_CFG_TRAIN = ReaderPreprocessingCfg(
     extra_text="UNANSWERABLE Yes No",
 )
 
-OCOQA_PREPROCESSING_CFG_TEST = ReaderPreprocessingCfg(
+TOPIOCQA_PREPROCESSING_CFG_TEST = ReaderPreprocessingCfg(
     use_tailing_sep=False,
     skip_no_positves=True,
     include_gold_passage=False,
@@ -273,7 +273,7 @@ def preprocess_retriever_data(
     samples: List[Dict],
     gold_info_file: Optional[str],
     tensorizer: Tensorizer,
-    cfg: ReaderPreprocessingCfg = OCOQA_PREPROCESSING_CFG_TRAIN,
+    cfg: ReaderPreprocessingCfg = TOPIOCQA_PREPROCESSING_CFG_TRAIN,
     is_train_set: bool = True,
     encoder_seq_length: int = 256,
 ) -> Iterable[ReaderSample]:
@@ -288,8 +288,8 @@ def preprocess_retriever_data(
     """
     sep_tensor = tensorizer.get_pair_separator_ids()  # separator can be a multi token
 
-    if "test" in gold_info_file:
-        cfg = OCOQA_PREPROCESSING_CFG_TEST
+    if gold_info_file is None:
+        cfg = TOPIOCQA_PREPROCESSING_CFG_TEST
     gold_passage_map, canonical_questions = (
         _get_gold_ctx_dict(gold_info_file, cfg.extra_text) if gold_info_file else ({}, {})
     )
