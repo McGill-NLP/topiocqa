@@ -20,7 +20,7 @@ from dpr.data.biencoder_data import (
 )
 
 logger = logging.getLogger(__name__)
-QASample = collections.namedtuple("QuerySample", ["query", "id", "answers"])
+QASample = collections.namedtuple("QuerySample", ["query", "id", "answers", "conv_id", "turn_id"])
 TableChunk = collections.namedtuple("TableChunk", ["text", "title", "table_id"])
 
 
@@ -111,6 +111,8 @@ class JsonlQASrc(QASrc):
         question_attr: str = "question",
         answers_attr: str = "answers",
         id_attr: str = "id",
+        conv_id_attr: str = "conv_id",
+        turn_id_attr: str = "turn_id",
         special_query_token: str = None,
         query_special_suffix: str = None,
     ):
@@ -126,10 +128,12 @@ class JsonlQASrc(QASrc):
             for jline in jsonl_reader:
                 question = jline[self.question_attr]
                 answers = jline[self.answers_attr] if self.answers_attr in jline else []
+                conv_id = jline[self.conv_id_attr]
+                turn_id = jline[self.turn_id_attr]
                 id = None
                 if self.id_attr in jline:
                     id = jline[self.id_attr]
-                data.append(QASample(self._process_question(question), id, answers))
+                data.append(QASample(self._process_question(question), id, answers, conv_id, turn_id))
         self.data = data
 
 
