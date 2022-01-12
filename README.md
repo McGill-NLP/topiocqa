@@ -88,7 +88,7 @@ If the downloaded files are not kept in the `downloads` directory, please change
 
 ### Retiever Inference
 
-The trained model checkpoint can be downloaded with the following command:
+The trained model checkpoint for `AllHistory` can also be downloaded with the following command:
 ```
 python download_data.py --resource model_checkpoints.retriever.dpr.all_history
 ```
@@ -145,4 +145,46 @@ python evaluate_retriever.py \
 ```
 
 ## Modeling Reader
-TODO
+We experiment with two reader models - (1) DPR Reader and (2) [FiD](https://github.com/facebookresearch/FiD) (Fusion-in-Decoder). Both reader models directly take the retriever results as input. Additionally, during training, we also provide the gold question-passage pairs.
+
+### DPR Reader
+
+To train the DPR Reader model, we use the following command:
+```
+python DPR/train_extractive_reader.py \
+        encoder.sequence_length=384 \
+        train_files={path to the retriever train set results file} \
+        dev_files={path to the retriever dev set results file} \
+        gold_passages_src={path to gold passage info file for train set} \
+        gold_passages_src_dev={path to gold passage info file for train set} \
+        output_dir={your output dir}
+```
+
+The revelant files to run the above command can be downloaded using the following resource keys: `results.retriever.dpr.all_history`, `data.gold_passages_info.all_history`. First time run will preprocess `train_files` & `dev_files` and convert them into serialized set of .pkl files in the same locaion and will use them on all subsequent runs. The DPR reader model reported in the paper was trained on 8 x 32GB V100 GPU machines.
+
+To evaluate the DPR Reader model, we use the same command as above, but without `train_files` argument:
+```
+python DPR/train_extractive_reader.py \
+        encoder.sequence_length=384 \
+        prediction_results_file={your output file path} \
+        dev_files={path to the retriever results file} \
+        eval_top_docs=[10,20,40,50,80,100] \
+        model_file={path to model file} \
+        train.dev_batch_size=80 \
+        train.log_batch_step=1 \
+        passages_per_question_predict=100
+```
+
+The inference results can be downloaded using `results.reader.dpr_reader.dpr_retriever.all_history` as the resource key.
+
+Evaluation in TopiOCQA is different from that performed in original implementation of DPR (Refer to Section 5.2 in the [paper](https://arxiv.org/pdf/2110.00768.pdf)). Our evaluation code is based on [CoQA](https://stanfordnlp.github.io/coqa/). We use the following command to evaluate the reader results:
+```
+python evaluate_reader.py \
+        --data_file {path to train/dev split of the dataset} \
+        --results_file {path to reader results file}
+```
+
+
+
+
+### FiD
