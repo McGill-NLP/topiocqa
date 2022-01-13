@@ -20,6 +20,7 @@ import time
 from typing import Tuple
 
 import hydra
+from hydra.utils import get_original_cwd
 import torch
 from omegaconf import DictConfig, OmegaConf
 from torch import Tensor as T
@@ -801,6 +802,8 @@ def main(cfg: DictConfig):
         )
 
     if cfg.output_dir is not None:
+        if not os.path.isabs(cfg.output_dir):
+            cfg.output_dir = os.path.join(get_original_cwd(), cfg.output_dir)
         os.makedirs(cfg.output_dir, exist_ok=True)
 
     cfg = setup_cfg_gpu(cfg)
