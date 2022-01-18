@@ -17,10 +17,14 @@ def main(data_file, results_file):
     with open(results_file, 'r') as f:
         results = json.load(f)
 
+    assert len(data) == len(results)
+    
     ranks = []
 
     for i, sample in enumerate(data):
-        question = sample["question"]
+        assert str(sample["conv_id"]) == str(results[i]["conv_id"])
+        assert str(sample["turn_id"]) == str(results[i]["turn_id"])
+
         gold_ctx = sample["positive_ctxs"][0]
         rank_assigned = False
         for rank, ctx in enumerate(results[i]["ctxs"]):
@@ -36,7 +40,7 @@ def main(data_file, results_file):
         score = hits_at_n(ranks, n)
         final_scores["Hits@" + str(n)] = score
 
-    print(json.dumps(final_scores, indent=4, sort_keys=True))
+    print(json.dumps(final_scores, indent=4))
 
 if __name__ == "__main__":
 
