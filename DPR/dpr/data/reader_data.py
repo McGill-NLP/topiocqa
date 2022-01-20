@@ -94,6 +94,8 @@ class ReaderSample(object):
     def __init__(
         self,
         question: str,
+        conv_id: str,
+        turn_id: str,
         answers: List,
         positive_passages: List[ReaderPassage] = [],
         negative_passages: List[ReaderPassage] = [],
@@ -368,12 +370,14 @@ def preprocess_retriever_data(
         if is_train_set:
             yield ReaderSample(
                 question,
+                str(sample["conv_id"]),
+                str(sample["turn_id"]),
                 sample["answers"],
                 positive_passages=positive_passages,
                 negative_passages=negative_passages,
             )
         else:
-            yield ReaderSample(question, sample["answers"], passages=negative_passages)
+            yield ReaderSample(question, str(sample["conv_id"]), str(sample["turn_id"]), sample["answers"], passages=negative_passages)
 
     logger.info("no positive passages samples: %d", no_positive_passages)
     logger.info("positive passages from gold samples: %d", positives_from_gold)
@@ -697,7 +701,7 @@ def _get_gold_ctx_dict(file: str, extra_text: str) -> Tuple[Dict[str, ReaderPass
 
     with open(file, "r", encoding="utf-8") as f:
         logger.info("Reading file %s" % file)
-        data = json.load(f)["data"]
+        data = json.load(f)
 
     for sample in data:
         question = sample["question"].replace("'", "’")
