@@ -106,6 +106,8 @@ class ReaderSample(object):
         self.positive_passages = positive_passages
         self.negative_passages = negative_passages
         self.passages = passages
+        self.conv_id = conv_id
+        self.turn_id = turn_id
 
     def on_serialize(self):
         for passage in self.passages + self.positive_passages + self.negative_passages:

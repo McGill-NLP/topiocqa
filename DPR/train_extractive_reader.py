@@ -61,7 +61,7 @@ setup_logger(logger)
 logging.getLogger('transformers.tokenization_utils').setLevel(logging.ERROR)
 
 ReaderQuestionPredictions = collections.namedtuple(
-    "ReaderQuestionPredictions", ["id", "predictions", "gold_answers"]
+    "ReaderQuestionPredictions", ["id", "conv_id", "turn_id", "predictions", "gold_answers"]
 )
 
 class ReaderTrainer(object):
@@ -73,6 +73,9 @@ class ReaderTrainer(object):
 
         logger.info("***** Initializing components for training *****")
 
+        if cfg.model_file:
+            if not os.path.isabs(cfg.model_file):
+                cfg.model_file = os.path.join(get_original_cwd(), cfg.model_file)
         model_file = get_model_file(self.cfg, self.cfg.checkpoint_file_name)
         saved_state = None
         if model_file:
@@ -304,6 +307,10 @@ class ReaderTrainer(object):
             logger.info("n=%d\tEM %.2f" % (n, em * 100))
 
         if cfg.prediction_results_file:
+            if not os.path.isabs(cfg.prediction_results_file):
+                cfg.prediction_results_file = os.path.join(
+                    get_original_cwd(), cfg.prediction_results_file
+                )
             os.makedirs(os.path.dirname(cfg.prediction_results_file), exist_ok=True)
             self._save_predictions(cfg.prediction_results_file, all_results)
 
@@ -532,7 +539,7 @@ class ReaderTrainer(object):
                 else:
                     predictions = {passages_per_question: nbest[0]}
             batch_results.append(
-                ReaderQuestionPredictions(sample.question, predictions, sample.answers)
+                ReaderQuestionPredictions(sample.question, sample.conv_id, sample.turn_id, predictions, sample.answers)
             )
         return batch_results
 
@@ -587,6 +594,8 @@ class ReaderTrainer(object):
                 save_results.append(
                     {
                         "question": r.id,
+                        "conv_id": r.conv_id,
+                        "turn_id": r.turn_id,
                         "gold_answers": r.gold_answers,
                         "predictions": [
                             {
