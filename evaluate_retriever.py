@@ -38,7 +38,7 @@ def main(data_file, results_file):
 
     for n in [1, 3, 5, 10, 20, 30 ,50, 100]:
         score = hits_at_n(ranks, n)
-        final_scores["Hits@" + str(n)] = score
+        final_scores["Hits@" + str(n)] = round(score, 2)
 
     print(json.dumps(final_scores, indent=4))
 
