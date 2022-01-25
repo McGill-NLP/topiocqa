@@ -236,7 +236,7 @@ def load_data(data_path=None, gold_data_path=None, n_context=-1, global_rank=-1,
     if gold_data_path is not None:
         assert os.path.exists(gold_data_path)
         with open(gold_data_path, 'r', encoding='utf-8') as fin:
-            gold_data = json.load(fin)["data"]
+            gold_data = json.load(fin)
         gold_data_map = {}
         for k, example in enumerate(gold_data):
             gold_data_map[example["question"].replace("’", "'")] = {'title': example['title'], 'text': example['context'], 'score': 10000.0}
