@@ -29,7 +29,7 @@ def train(model, optimizer, scheduler, step, train_dataset, eval_dataset, opt, c
 
     if opt.is_main:
         try:
-            tb_logger = torch.utils.tensorboard.SummaryWriter(Path(opt.checkpoint_dir)/opt.name)
+            tb_logger = torch.utils.tensorboard.SummaryWriter(Path(opt.checkpoint_dir))
         except:
             tb_logger = None
             logger.info('Tensorboard is not available.')
@@ -139,10 +139,7 @@ if __name__ == "__main__":
     src.slurm.init_distributed_mode(opt)
     src.slurm.init_signal_handler()
 
-    if opt.name is None:
-        opt.name = time.strftime("%Y%m%d-%H%M%S")
-
-    checkpoint_path = Path(opt.checkpoint_dir)/opt.name
+    checkpoint_path = Path(opt.checkpoint_dir)
     checkpoint_exists = checkpoint_path.exists()
     if opt.is_distributed:
         torch.distributed.barrier()
