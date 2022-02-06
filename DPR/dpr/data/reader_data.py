@@ -94,6 +94,8 @@ class ReaderSample(object):
     def __init__(
         self,
         question: str,
+        conv_id: str,
+        turn_id: str,
         answers: List,
         positive_passages: List[ReaderPassage] = [],
         negative_passages: List[ReaderPassage] = [],
@@ -104,6 +106,8 @@ class ReaderSample(object):
         self.positive_passages = positive_passages
         self.negative_passages = negative_passages
         self.passages = passages
+        self.conv_id = conv_id
+        self.turn_id = turn_id
 
     def on_serialize(self):
         for passage in self.passages + self.positive_passages + self.negative_passages:
@@ -242,7 +246,7 @@ DEFAULT_PREPROCESSING_CFG_TRAIN = ReaderPreprocessingCfg(
     extra_text="",
 )
 
-OCOQA_PREPROCESSING_CFG_TRAIN = ReaderPreprocessingCfg(
+TOPIOCQA_PREPROCESSING_CFG_TRAIN = ReaderPreprocessingCfg(
     use_tailing_sep=False,
     skip_no_positves=True,
     include_gold_passage=True,
@@ -254,7 +258,7 @@ OCOQA_PREPROCESSING_CFG_TRAIN = ReaderPreprocessingCfg(
     extra_text="UNANSWERABLE Yes No",
 )
 
-OCOQA_PREPROCESSING_CFG_TEST = ReaderPreprocessingCfg(
+TOPIOCQA_PREPROCESSING_CFG_TEST = ReaderPreprocessingCfg(
     use_tailing_sep=False,
     skip_no_positves=True,
     include_gold_passage=False,
@@ -273,7 +277,7 @@ def preprocess_retriever_data(
     samples: List[Dict],
     gold_info_file: Optional[str],
     tensorizer: Tensorizer,
-    cfg: ReaderPreprocessingCfg = OCOQA_PREPROCESSING_CFG_TRAIN,
+    cfg: ReaderPreprocessingCfg = TOPIOCQA_PREPROCESSING_CFG_TRAIN,
     is_train_set: bool = True,
     encoder_seq_length: int = 256,
 ) -> Iterable[ReaderSample]:
@@ -288,8 +292,8 @@ def preprocess_retriever_data(
     """
     sep_tensor = tensorizer.get_pair_separator_ids()  # separator can be a multi token
 
-    if "test" in gold_info_file:
-        cfg = OCOQA_PREPROCESSING_CFG_TEST
+    if gold_info_file is None:
+        cfg = TOPIOCQA_PREPROCESSING_CFG_TEST
     gold_passage_map, canonical_questions = (
         _get_gold_ctx_dict(gold_info_file, cfg.extra_text) if gold_info_file else ({}, {})
     )
@@ -327,12 +331,13 @@ def preprocess_retriever_data(
         # for some reason, only this training example was facing an issue
         if question == 'product recall is an episode from which series':
             question = '"product recall" is an episode from which series'
-        if question not in canonical_questions:
+        if is_train_set and question not in canonical_questions:
             logger.info("Question not found in canonical questions: %s", question)
             assert False
         # if question in canonical_questions:
-        question = canonical_questions[question]
-        assert question == canonical_questions[question]
+        if is_train_set:
+            question = canonical_questions[question]
+            assert question == canonical_questions[question]
 
         positive_passages, negative_passages = _select_reader_passages(
             sample,
@@ -367,12 +372,14 @@ def preprocess_retriever_data(
         if is_train_set:
             yield ReaderSample(
                 question,
+                str(sample["conv_id"]),
+                str(sample["turn_id"]),
                 sample["answers"],
                 positive_passages=positive_passages,
                 negative_passages=negative_passages,
             )
         else:
-            yield ReaderSample(question, sample["answers"], passages=negative_passages)
+            yield ReaderSample(question, str(sample["conv_id"]), str(sample["turn_id"]), sample["answers"], passages=negative_passages)
 
     logger.info("no positive passages samples: %d", no_positive_passages)
     logger.info("positive passages from gold samples: %d", positives_from_gold)
@@ -582,8 +589,9 @@ def _select_reader_passages(
         )[0:max_positives]
 
     # optionally include gold passage itself if it is still not in the positives list
-    assert question in gold_passage_map
+    
     if include_gold_passage:
+        assert question in gold_passage_map
         gold_passage = gold_passage_map[question]
         included_gold_passage = next(
             iter(ctx for ctx in selected_positive_ctxs if ctx.id == gold_passage.id),
@@ -695,7 +703,7 @@ def _get_gold_ctx_dict(file: str, extra_text: str) -> Tuple[Dict[str, ReaderPass
 
     with open(file, "r", encoding="utf-8") as f:
         logger.info("Reading file %s" % file)
-        data = json.load(f)["data"]
+        data = json.load(f)
 
     for sample in data:
         question = sample["question"].replace("'", "’")

@@ -17,6 +17,7 @@ import pickle
 from typing import List, Tuple
 
 import hydra
+from hydra.utils import get_original_cwd
 import numpy as np
 import torch
 from omegaconf import DictConfig, OmegaConf
@@ -103,6 +104,8 @@ def main(cfg: DictConfig):
 
     cfg = setup_cfg_gpu(cfg)
 
+    if not os.path.isabs(cfg.model_file):
+        cfg.model_file = os.path.join(get_original_cwd(), cfg.model_file)
     saved_state = load_states_from_checkpoint(cfg.model_file)
     set_cfg_params_from_state(saved_state.encoder_params, cfg)
 
@@ -160,6 +163,8 @@ def main(cfg: DictConfig):
 
     data = gen_ctx_vectors(cfg, shard_passages, encoder, tensorizer, True)
 
+    if not os.path.isabs(cfg.out_file):
+        cfg.out_file = os.path.join(get_original_cwd(), cfg.out_file)
     file = cfg.out_file + "_" + str(cfg.shard_id) + ".pkl"
     pathlib.Path(os.path.dirname(file)).mkdir(parents=True, exist_ok=True)
     logger.info("Writing results to %s" % file)

@@ -20,7 +20,7 @@ from dpr.data.biencoder_data import (
 )
 
 logger = logging.getLogger(__name__)
-QASample = collections.namedtuple("QuerySample", ["query", "id", "answers"])
+QASample = collections.namedtuple("QuerySample", ["query", "id", "answers", "conv_id", "turn_id"])
 TableChunk = collections.namedtuple("TableChunk", ["text", "title", "table_id"])
 
 
@@ -77,7 +77,9 @@ class CsvQASrc(QASrc):
         self,
         file: str,
         question_col: int = 0,
-        answers_col: int = 1,
+        conv_id_col: int = 1,
+        turn_id_col: int = 2,
+        answers_col: int = 3,
         id_col: int = -1,
         selector: DictConfig = None,
         special_query_token: str = None,
@@ -85,6 +87,8 @@ class CsvQASrc(QASrc):
     ):
         super().__init__(file, selector, special_query_token, query_special_suffix)
         self.question_col = question_col
+        self.conv_id_col = conv_id_col
+        self.turn_id_col = turn_id_col
         self.answers_col = answers_col
         self.id_col = id_col
 
@@ -95,11 +99,13 @@ class CsvQASrc(QASrc):
             reader = csv.reader(ifile, delimiter="\t")
             for row in reader:
                 question = row[self.question_col]
+                conv_id = row[self.conv_id_col]
+                turn_id = row[self.turn_id_col]
                 answers = eval(row[self.answers_col])
                 id = None
                 if self.id_col >= 0:
                     id = row[self.id_col]
-                data.append(QASample(self._process_question(question), id, answers))
+                data.append(QASample(self._process_question(question), id, answers, conv_id, turn_id))
         self.data = data
 
 
@@ -111,6 +117,8 @@ class JsonlQASrc(QASrc):
         question_attr: str = "question",
         answers_attr: str = "answers",
         id_attr: str = "id",
+        conv_id_attr: str = "conv_id",
+        turn_id_attr: str = "turn_id",
         special_query_token: str = None,
         query_special_suffix: str = None,
     ):
@@ -118,6 +126,8 @@ class JsonlQASrc(QASrc):
         self.question_attr = question_attr
         self.answers_attr = answers_attr
         self.id_attr = id_attr
+        self.conv_id_attr = conv_id_attr
+        self.turn_id_attr = turn_id_attr
 
     def load_data(self):
         super().load_data()
@@ -126,10 +136,12 @@ class JsonlQASrc(QASrc):
             for jline in jsonl_reader:
                 question = jline[self.question_attr]
                 answers = jline[self.answers_attr] if self.answers_attr in jline else []
+                conv_id = jline[self.conv_id_attr]
+                turn_id = jline[self.turn_id_attr]
                 id = None
                 if self.id_attr in jline:
                     id = jline[self.id_attr]
-                data.append(QASample(self._process_question(question), id, answers))
+                data.append(QASample(self._process_question(question), id, answers, conv_id, turn_id))
         self.data = data
 
 

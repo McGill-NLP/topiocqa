@@ -18,6 +18,7 @@ import time
 from typing import List, Tuple, Dict, Iterator
 
 import hydra
+from hydra.utils import get_original_cwd
 import numpy as np
 import torch
 from omegaconf import DictConfig, OmegaConf
@@ -206,6 +207,8 @@ def save_results(
     passages: Dict[object, Tuple[str, str]],
     questions: List[str],
     answers: List[List[str]],
+    conv_ids: List[str],
+    turn_ids: List[str],
     top_passages_and_scores: List[Tuple[List[object], List[float]]],
     per_question_hits: List[List[bool]],
     out_file: str,
@@ -225,6 +228,8 @@ def save_results(
             {
                 "question": q,
                 "answers": q_answers,
+                "conv_id": conv_ids[i],
+                "turn_id": turn_ids[i],
                 "ctxs": [
                     {
                         "id": results_and_scores[0][c],
@@ -290,6 +295,8 @@ def main(cfg: DictConfig):
     logger.info("CFG (after gpu  configuration):")
     logger.info("%s", OmegaConf.to_yaml(cfg))
 
+    if not os.path.isabs(cfg.model_file):
+        cfg.model_file = os.path.join(get_original_cwd(), cfg.model_file)
     saved_state = load_states_from_checkpoint(cfg.model_file)
     set_cfg_params_from_state(saved_state.encoder_params, cfg)
 
@@ -331,6 +338,8 @@ def main(cfg: DictConfig):
     # get questions & answers
     questions = []
     question_answers = []
+    conv_ids = []
+    turn_ids = []
 
     if not cfg.qa_dataset:
         logger.warning("Please specify qa_dataset to use")
@@ -346,6 +355,8 @@ def main(cfg: DictConfig):
         question, answers = ds_item.query, ds_item.answers
         questions.append(question)
         question_answers.append(answers)
+        conv_ids.append(ds_item.conv_id)
+        turn_ids.append(ds_item.turn_id)
 
     index = hydra.utils.instantiate(cfg.indexers[cfg.indexer])
     logger.info("Index class %s ", type(index))
@@ -388,6 +399,8 @@ def main(cfg: DictConfig):
     input_paths = []
     path_id_prefixes = []
     for i, pattern in enumerate(ctx_files_patterns):
+        if not os.path.isabs(pattern):
+            pattern = os.path.join(get_original_cwd(), pattern)
         pattern_files = glob.glob(pattern)
         pattern_id_prefix = id_prefixes[i]
         input_paths.extend(pattern_files)
@@ -445,10 +458,14 @@ def main(cfg: DictConfig):
 
     logger.info("Saving results")
     if cfg.out_file:
+        if not os.path.isabs(cfg.out_file):
+            cfg.out_file = os.path.join(get_original_cwd(), cfg.out_file)
         save_results(
             all_passages,
             questions,
             question_answers,
+            conv_ids,
+            turn_ids,
             top_ids_and_scores,
             questions_doc_hits,
             cfg.out_file,

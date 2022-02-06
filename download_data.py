@@ -143,47 +143,47 @@ RESOURCES_MAP = {
         "original_ext": ".pkl",
         "desc": "Wikipedia passages for rewrites passages",
     },
-    "model_checkpoints.retriever.dpr.all_history": {
+    "model_checkpoints.retriever.dpr.all_history.checkpoint": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/retriever/dpr_retriever_all_history",
         "original_ext": ".pt",
         "desc": "Retriever DPR model checkpoints for all history passages",
     },
-    "model_checkpoints.retriever.dpr.original": {
+    "model_checkpoints.retriever.dpr.original.checkpoint": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/retriever/dpr_retriever_original",
         "original_ext": ".pt",
         "desc": "Retriever DPR model checkpoints for original passages",
     },
-    "model_checkpoints.retriever.dpr.rewrites_t5_qrecc": {
+    "model_checkpoints.retriever.dpr.rewrites_t5_qrecc.checkpoint": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/retriever/dpr_retriever_rewrites_t5_qrecc",
         "original_ext": ".pt",
         "desc": "Retriever DPR model checkpoints for rewrites passages",
     },
-    "model_checkpoints.reader.dpr_reader.dpr_retriever.all_history": {
+    "model_checkpoints.reader.dpr_reader.dpr_retriever.all_history.checkpoint": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_retriever/dpr_reader_all_history",
         "original_ext": ".pt",
         "desc": "Reader DPR model checkpoints for all history passages",
     },
-    "model_checkpoints.reader.dpr_reader.dpr_retriever.original": {
+    "model_checkpoints.reader.dpr_reader.dpr_retriever.original.checkpoint": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_retriever/dpr_reader_original",
         "original_ext": ".pt",
         "desc": "Reader DPR model checkpoints for original passages",
     },
-    "model_checkpoints.reader.dpr_reader.dpr_retriever.rewrites_t5_qrecc": {
+    "model_checkpoints.reader.dpr_reader.dpr_retriever.rewrites_t5_qrecc.checkpoint": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_retriever/dpr_reader_rewrites_t5_qrecc",
         "original_ext": ".pt",
         "desc": "Reader DPR model checkpoints for rewrites passages",
     },
-    "model_checkpoints.reader.dpr_reader.bm25_retriever.all_history": {
+    "model_checkpoints.reader.dpr_reader.bm25_retriever.all_history.checkpoint": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/bm25_retriever/dpr_reader_all_history",
         "original_ext": ".pt",
         "desc": "Reader BM25 model checkpoints for all history passages",
     },
-    "model_checkpoints.reader.dpr_reader.bm25_retriever.original": {
+    "model_checkpoints.reader.dpr_reader.bm25_retriever.original.checkpoint": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/bm25_retriever/dpr_reader_original",
         "original_ext": ".pt",
         "desc": "Reader BM25 model checkpoints for original passages",
     },
-    "model_checkpoints.reader.dpr_reader.bm25_retriever.rewrites_t5_qrecc": {
+    "model_checkpoints.reader.dpr_reader.bm25_retriever.rewrites_t5_qrecc.checkpoint": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/bm25_retriever/dpr_reader_rewrites_t5_qrecc",
         "original_ext": ".pt",
         "desc": "Reader BM25 model checkpoints for rewrites passages",
