@@ -14,6 +14,8 @@ from torch.utils.data import DataLoader, SequentialSampler
 import logging
 logger = logging.getLogger()
 
+import json
+
 import src.slurm
 import src.util
 from src.options import Options
@@ -33,7 +35,7 @@ def evaluate(model, dataset, dataloader, tokenizer, opt):
     exactmatch = []
     if opt.write_results:
         write_path = Path(opt.checkpoint_dir) / opt.name / 'test_results'
-        fw = open(write_path / ('%d.txt'%opt.global_rank), 'a')
+        fw = open(write_path / ('%d.jsonl'%opt.global_rank), 'a')
     with torch.no_grad():
         for i, batch in enumerate(dataloader):
             (idx, _, _, context_ids, context_mask) = batch
@@ -58,7 +60,8 @@ def evaluate(model, dataset, dataloader, tokenizer, opt):
                     exactmatch.append(score)
 
                 if opt.write_results:
-                    fw.write(str(example['id']) + "\t" + ans + '\n')
+                    obj = {"question": example["question"], "conv_id": example['conv_id'], "turn_id": example['turn_id'], "predictions": [ans]}
+                    fw.write(json.dumps(obj) + '\n')
                 if opt.write_crossattention_scores:
                     for j in range(context_ids.size(1)):
                         example['ctxs'][j]['score'] = crossattention_scores[k, j].item()
@@ -138,7 +141,8 @@ if __name__ == "__main__":
 
     if opt.write_results and opt.is_main:
         glob_path = Path(opt.checkpoint_dir) / opt.name / 'test_results'
-        write_path = Path(opt.checkpoint_dir) / opt.name / 'final_output.txt'
+        # to change train/dev/test
+        write_path = Path(opt.checkpoint_dir) / f'{opt.name}.json'
         src.util.write_output(glob_path, write_path) 
     if opt.write_crossattention_scores:
         src.util.save_distributed_dataset(eval_dataset.data, opt)
