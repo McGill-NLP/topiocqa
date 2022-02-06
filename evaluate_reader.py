@@ -121,7 +121,7 @@ class TopiOCQAEvaluator():
             key = (conv_id, turn_id)
             if key not in pred_data:
                 sys.stderr.write(
-                    'Missing prediction for {} and turn_id: {}\n'.format(conv_id, turn_id))
+                    'Missing prediction for conv_id {} and turn_id: {}\n'.format(conv_id, turn_id))
                 continue
             a_pred = pred_data[key]
             scores = self.compute_turn_score(conv_id, turn_id, a_pred)
@@ -176,10 +176,30 @@ class TopiOCQAEvaluator():
                 'turns': final_scores['turns']}
 
 
-def main(data_file, results_file):
+def main(human_performance, data_file, results_file, top_k):
+
     evaluator = TopiOCQAEvaluator(data_file)
-    results = evaluator.human_performance()
-    print(json.dumps(results))
+    if human_performance:
+        print("Human performance")
+        results = evaluator.human_performance()
+        print(json.dumps(results, indent=4))
+    else:
+        with open(results_file, 'r') as f:
+            pred_data = json.load(f)
+        pred_data_dict = {}
+        for prediction in pred_data:
+            # DPR Reader results which depend on top-k
+            if top_k:
+                for ans in prediction['predictions']:
+                    if ans["top_k"] == top_k:
+                        pred_data_dict[(int(prediction['conv_id']), int(prediction['turn_id']))] = ans["prediction"]["text"]
+            # FiD results which do not depend on top-k
+            else:
+                pred_data_dict[(int(prediction['conv_id']), int(prediction['turn_id']))] = prediction['predictions'][0]
+
+        print("Model performance")
+        results = evaluator.model_performance(pred_data_dict)
+        print(json.dumps(results, indent=4))
 
 
 if __name__ == "__main__":
@@ -189,5 +209,7 @@ if __name__ == "__main__":
                         default='topiocqa_dataset/topiocqa_dev.json')
     parser.add_argument("--results_file", type=str,
                         default='downloads/results/reader/dpr_reader/dpr_retriever/all_history/dev.json')
+    parser.add_argument("--top_k", type=int, default=None)
+    parser.add_argument("--human_performance", action='store_true')
     args = parser.parse_args()
-    main(args.data_file, args.results_file)
+    main(args.human_performance, args.data_file, args.results_file, args.top_k)
