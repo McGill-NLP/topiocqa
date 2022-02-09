@@ -186,7 +186,37 @@ RESOURCES_MAP = {
     "model_checkpoints.reader.dpr_reader.bm25_retriever.rewrites_t5_qrecc.checkpoint": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/bm25_retriever/dpr_reader_rewrites_t5_qrecc",
         "original_ext": ".pt",
-        "desc": "Reader BM25 model checkpoints for rewrites passages",
+        "desc": "DPR Reader model checkpoint for rewrites variant with BM25 Retriever",
+    },
+    "model_checkpoints.reader.fid.dpr_retriever.all_history.checkpoint": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/dpr_retriever/all_history",
+        "original_ext": ".zip",
+        "desc": "FiD model checkpoint for all history variant with DPR Retriever",
+    },
+    "model_checkpoints.reader.fid.dpr_retriever.original.checkpoint": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/dpr_retriever/original",
+        "original_ext": ".zip",
+        "desc": "FiD model checkpoint for original variant with DPR Retriever",
+    },
+    "model_checkpoints.reader.fid.dpr_retriever.rewrites_t5_qrecc.checkpoint": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/dpr_retriever/rewrites_t5_qrecc",
+        "original_ext": ".zip",
+        "desc": "FiD model checkpoint for rewrites variant with DPR Retriever",
+    },
+    "model_checkpoints.reader.fid.bm25_retriever.all_history.checkpoint": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/bm25_retriever/all_history",
+        "original_ext": ".zip",
+        "desc": "FiD model checkpoint for all history variant with BM25 Retriever",
+    },
+    "model_checkpoints.reader.fid.bm25_retriever.original.checkpoint": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/bm25_retriever/original",
+        "original_ext": ".zip",
+        "desc": "FiD model checkpoint for original variant with BM25 Retriever",
+    },
+    "model_checkpoints.reader.fid.bm25_retriever.rewrites_t5_qrecc.checkpoint": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/bm25_retriever/rewrites_t5_qrecc",
+        "original_ext": ".zip",
+        "desc": "FiD model checkpoint for rewrites variant with BM25 Retriever",
     },
     "results.retriever.dpr.all_history.train": {
         "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_all_history_train.json",
