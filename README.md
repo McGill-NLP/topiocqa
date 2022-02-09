@@ -160,7 +160,7 @@ python DPR/train_extractive_reader.py \
         output_dir={your output dir}
 ```
 
-The revelant files to run the above command can be downloaded using the following resource keys: `results.retriever.dpr.all_history`, `data.gold_passages_info.all_history`. First time run will preprocess `train_files` & `dev_files` and convert them into serialized set of .pkl files in the same locaion and will use them on all subsequent runs. The DPR reader model reported in the paper was trained on 8 x 32GB V100 GPU machines.
+The revelant files to run the above command can be downloaded using the following resource keys: `results.retriever.dpr.all_history`, `data.gold_passages_info.all_history`. First time run will preprocess `train_files` & `dev_files` and convert them into serialized set of .pkl files in the same location and will use them on all subsequent runs. The DPR reader model reported in the paper was trained on 8 x 32GB V100 GPU machines. The trained checkpoint for DPR Reader trained on DPR Retriever results can be downloaded using `model_checkpoints.reader.dpr_reader.dpr_retriever.all_history`.
 
 To evaluate the DPR Reader model, we use the same command as above, but without `train_files` argument:
 ```
@@ -174,9 +174,53 @@ python DPR/train_extractive_reader.py \
         train.log_batch_step=1 \
         passages_per_question_predict=100
 ```
-
 The inference results can be downloaded using `results.reader.dpr_reader.dpr_retriever.all_history` as the resource key.
 
+
+### FiD
+FiD (Fusion-in-Decoder) is trained using the following command on 8 x 32GB V100 GPU machines.:
+```
+python -m torch.distributed.launch --nproc_per_node=8 \
+        FiD/train_reader.py \
+        --model_size base \
+        --use_checkpoint \
+        --lr 0.00005 \
+        --optim adamw \
+        --scheduler linear \
+        --weight_decay 0.01 \
+        --text_maxlength 384 \
+        --answer_maxlength 100 \
+        --per_gpu_batch_size 2 \
+        --accumulation_steps 4 \
+        --n_context 50 \
+        --total_step 15000 \
+        --warmup_step 1000 \
+        --eval_freq 1000 \
+        --checkpoint_dir {your output dir} \
+        --train_data {path to the retriever train set results file} \
+        --gold_passages_train {path to gold passage info file for train set} \
+        --eval_data {path to the retriever dev set results file}
+```
+The trained checkpoint for FiD trained on DPR Retriever results can be downloaded using `model_checkpoints.reader.fid.dpr_retriever.all_history`. The downloaded file will be a compressed folder which will be required to be extracted before moving to evaluation step.
+
+To evaluate the FiD model, we use the following command on a single 32GB V100 GPU machine:
+```
+python FiD/test_reader.py \
+        --model_path {path to model file} \
+        --eval_data {path to the retriever results file} \
+        --text_maxlength 384 \
+        --answer_maxlength 100 \
+        --per_gpu_batch_size 16 \
+        --n_context 50 \
+        --checkpoint_dir {your output file path} \
+        --name {dataset split, e.g. test} \
+        --write_results \
+        --eval_print_freq 10
+```
+The inference results can be downloaded using `results.reader.fid.dpr_retriever.all_history` as the resource key.
+
+
+### Reader Result Evaluation
 Evaluation in TopiOCQA is different from that performed in original implementation of DPR (Refer to Section 5.2 in the [paper](https://arxiv.org/pdf/2110.00768.pdf)). Our evaluation code is based on [CoQA](https://stanfordnlp.github.io/coqa/). We use the following command to evaluate the reader results:
 ```
 python evaluate_reader.py \
