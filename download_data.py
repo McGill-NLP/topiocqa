@@ -278,65 +278,65 @@ RESOURCES_MAP = {
         "original_ext": ".json",
         "desc": "Retriever BM25 results for rewrites variant on dev set",
     },
-    "results.reader.dpr_reader.dpr_retriever.all_history.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_all_history_train.json",
-        "original_ext": ".json",
-        "desc": "Reader DPR Retriever results for all history passages",
-    },
     "results.reader.dpr_reader.dpr_retriever.all_history.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_all_history_dev.json",
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/DPR_retriever/topiocqa_all_history_dev.json",
         "original_ext": ".json",
-        "desc": "Reader DPR Retriever results for all history passages",
-    },
-    "results.reader.dpr_reader.dpr_retriever.original.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_original_train.json",
-        "original_ext": ".json",
-        "desc": "Reader DPR Retriever results for original passages",
+        "desc": "DPR Reader results using DPR Retriever results for all history variant on dev set",
     },
     "results.reader.dpr_reader.dpr_retriever.original.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_original_dev.json",
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/DPR_retriever/topiocqa_original_dev.json",
         "original_ext": ".json",
-        "desc": "Reader DPR Retriever results for original passages",
-    },
-    "results.reader.dpr_reader.dpr_retriever.rewrites_t5_qrecc.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_rewrites_t5_qrecc_train.json",
-        "original_ext": ".json",
-        "desc": "Reader DPR Retriever results for rewrites passages",
+        "desc": "DPR Reader results using DPR Retriever results for original variant on dev set",
     },
     "results.reader.dpr_reader.dpr_retriever.rewrites_t5_qrecc.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/topiocqa_rewrites_t5_qrecc_dev.json",
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/DPR_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
-        "desc": "Reader DPR Retriever results for rewrites passages",
-    },
-    "results.reader.dpr_reader.bm25_retriever.all_history.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_all_history_train.json",
-        "original_ext": ".json",
-        "desc": "Reader BM25 Retriever results for all history passages",
+        "desc": "DPR Reader results using DPR Retriever results for rewrites variant on dev set",
     },
     "results.reader.dpr_reader.bm25_retriever.all_history.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_all_history_dev.json",
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/BM25_retriever/topiocqa_all_history_dev.json",
         "original_ext": ".json",
-        "desc": "Reader BM25 Retriever results for all history passages",
-    },
-    "results.reader.dpr_reader.bm25_retriever.original.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_original_train.json",
-        "original_ext": ".json",
-        "desc": "Reader BM25 Retriever results for original passages",
+        "desc": "DPR Reader results using BM25 Retriever results for all history variant on dev set",
     },
     "results.reader.dpr_reader.bm25_retriever.original.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_original_dev.json",
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/BM25_retriever/topiocqa_original_dev.json",
         "original_ext": ".json",
-        "desc": "Reader BM25 Retriever results for original passages",
-    },
-    "results.reader.dpr_reader.bm25_retriever.rewrites_t5_qrecc.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_rewrites_t5_qrecc_train.json",
-        "original_ext": ".json",
-        "desc": "Reader BM25 Retriever results for rewrites passages",
+        "desc": "DPR Reader results using BM25 Retriever results for original variant on dev set",
     },
     "results.reader.dpr_reader.bm25_retriever.rewrites_t5_qrecc.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/BM25/topiocqa_rewrites_t5_qrecc_dev.json",
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/BM25_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
-        "desc": "Reader BM25 Retriever results for rewrites passages",
+        "desc": "DPR Reader results using BM25 Retriever results for rewrites variant on dev set",
+    },
+    "results.reader.fid.dpr_retriever.all_history.dev": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/DPR_retriever/topiocqa_all_history_dev.json",
+        "original_ext": ".json",
+        "desc": "FiD results using DPR Retriever results for all history variant on dev set",
+    },
+    "results.reader.fid.dpr_retriever.original.dev": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/DPR_retriever/topiocqa_original_dev.json",
+        "original_ext": ".json",
+        "desc": "FiD results using DPR Retriever results for original variant on dev set",
+    },
+    "results.reader.fid.dpr_retriever.rewrites_t5_qrecc.dev": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/DPR_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
+        "original_ext": ".json",
+        "desc": "FiD results using DPR Retriever results for rewrites variant on dev set",
+    },
+    "results.reader.fid.bm25_retriever.all_history.dev": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/BM25_retriever/topiocqa_all_history_dev.json",
+        "original_ext": ".json",
+        "desc": "FiD results using BM25 Retriever results for all history variant on dev set",
+    },
+    "results.reader.fid.bm25_retriever.original.dev": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/BM25_retriever/topiocqa_original_dev.json",
+        "original_ext": ".json",
+        "desc": "FiD results using BM25 Retriever results for original variant on dev set",
+    },
+    "results.reader.fid.bm25_retriever.rewrites_t5_qrecc.dev": {
+        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/BM25_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
+        "original_ext": ".json",
+        "desc": "FiD results using BM25 Retriever results for rewrites variant on dev set",
     },
 }
 
