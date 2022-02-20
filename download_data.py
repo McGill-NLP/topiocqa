@@ -20,331 +20,340 @@ logger = logging.getLogger(__name__)
 
 RESOURCES_MAP = {
     "data.wikipedia_split.full_wiki": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/wikipedia_split/full_wiki.jsonl",
+        "url": "https://zenodo.org/record/6173228/files/data/wikipedia_split/full_wiki.jsonl",
         "original_ext": ".jsonl",
         "desc": "Entire wikipedia corpus",
     },
     "data.wikipedia_split.full_wiki_segments": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/wikipedia_split/full_wiki_segments.tsv",
+        "url": "https://zenodo.org/record/6149599/files/data/wikipedia_split/full_wiki_segments.tsv",
         "original_ext": ".tsv",
-        "desc": "Entire wikipedia passages set obtain by splitting all pages into segments (no overlap)"
+        "desc": "Entire wikipedia passages set obtain by splitting all pages into 200-word segments (no overlap)"
     },
     "data.gold_passages_info.all_history.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_all_history_train.json",
+        "url": "https://zenodo.org/record/6151011/files/data/gold_passages_info/all_history/train.json",
         "original_ext": ".json",
-        "desc": "Gold passages info for train examples of all history variant",
+        "desc": "Gold passages info for all_history train passages",
     },
     "data.gold_passages_info.all_history.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_all_history_dev.json",
+        "url": "https://zenodo.org/record/6151011/files/data/gold_passages_info/all_history/dev.json",
         "original_ext": ".json",
-        "desc": "Gold passages info for dev examples of all history variant",
+        "desc": "Gold passages info for all_history dev passages",
     },
     "data.gold_passages_info.original.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_original_train.json",
+        "url": "https://zenodo.org/record/6151011/files/data/gold_passages_info/original/train.json",
         "original_ext": ".json",
         "desc": "Gold passages info for train examples of original variant",
     },
     "data.gold_passages_info.original.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_original_dev.json",
+        "url": "https://zenodo.org/record/6151011/files/data/gold_passages_info/original/dev.json",
         "original_ext": ".json",
         "desc": "Gold passages info for dev examples of original variant",
     },
     "data.gold_passages_info.rewrites_t5_qrecc.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_rewrites_t5_qrecc_train.json",
+        "url": "https://zenodo.org/record/6151011/files/data/gold_passages_info/rewrites_t5_qrecc/train.json",
         "original_ext": ".json",
         "desc": "Gold passages info for train examples of rewrites variant",
     },
     "data.gold_passages_info.rewrites_t5_qrecc.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/gold_passages_info/topiocqa_rewrites_t5_qrecc_dev.json",
+        "url": "https://zenodo.org/record/6151011/files/data/gold_passages_info/rewrites_t5_qrecc/dev.json",
         "original_ext": ".json",
         "desc": "Gold passages info for dev examples of rewrites variant",
     },
     "data.retriever.all_history.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_all_history_retriever_train.json",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/all_history/train.json",
         "original_ext": ".json",
-        "desc": "Retriever training data for all history variant",
+        "desc": "Retriever training data for all_history train passages",
     },
     "data.retriever.all_history.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_all_history_retriever_dev.json",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/all_history/dev.json",
         "original_ext": ".json",
-        "desc": "Retriever dev data for all history variant",
+        "desc": "Retriever training data for all_history dev passages",
     },
     "data.retriever.original.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_original_retriever_train.json",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/original/train.json",
         "original_ext": ".json",
-        "desc": "Retriever training data for original variant",
+        "desc": "Retriever training data for original train passages",
     },
     "data.retriever.original.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_original_retriever_dev.json",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/original/dev.json",
         "original_ext": ".json",
-        "desc": "Retriever dev data for original variant",
+        "desc": "Retriever training data for original dev passages",
     },
     "data.retriever.rewrites_t5_qrecc.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_rewrites_t5_qrecc_retriever_train.json",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/rewrites_t5_qrecc/train.json",
         "original_ext": ".json",
-        "desc": "Retriever training data for rewrites variant",
+        "desc": "Retriever training data for rewrites train passages",
     },
     "data.retriever.rewrites_t5_qrecc.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/topiocqa_rewrites_t5_qrecc_retriever_dev.json",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/rewrites_t5_qrecc/dev.json",
         "original_ext": ".json",
-        "desc": "Retriever dev data for rewrites variant",
+        "desc": "Retriever training data for rewrites dev passages",
     },
     "data.retriever.qas.all_history.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_all_history_retriever_train.csv",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/qas/all_history/train.csv",
         "original_ext": ".csv",
-        "desc": "Retriever training data for all history variant in csv format",
+        "desc": "Retriever training data for all_history train passages (CSV format)",
     },
     "data.retriever.qas.all_history.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_all_history_retriever_dev.csv",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/qas/all_history/dev.csv",
         "original_ext": ".csv",
-        "desc": "Retriever dev data for all history variant in csv format",
+        "desc": "Retriever training data for all_history dev passages (CSV format)",
     },
     "data.retriever.qas.original.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_original_retriever_train.csv",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/qas/original/train.csv",
         "original_ext": ".csv",
-        "desc": "Retriever training data for original variant in csv format",
+        "desc": "Retriever training data for original train passages (CSV format)",
     },
     "data.retriever.qas.original.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_original_retriever_dev.csv",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/qas/original/dev.csv",
         "original_ext": ".csv",
-        "desc": "Retriever dev data for original variant in csv format",
+        "desc": "Retriever training data for original dev passages (CSV format)",
     },
     "data.retriever.qas.rewrites_t5_qrecc.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_rewrites_t5_qrecc_retriever_train.csv",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/qas/rewrites_t5_qrecc/train.csv",
         "original_ext": ".csv",
-        "desc": "Retriever training data for rewrites variant in csv format",
+        "desc": "Retriever training data for rewrites train passages (CSV format)",
     },
     "data.retriever.qas.rewrites_t5_qrecc.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/data/retriever/qas/topiocqa_rewrites_t5_qrecc_retriever_dev.csv",
+        "url": "https://zenodo.org/record/6151011/files/data/retriever/qas/rewrites_t5_qrecc/dev.csv",
         "original_ext": ".csv",
         "desc": "Retriever dev data for rewrites variant in csv format",
     },
     "passage_embeddings.all_history.wikipedia_passages": {
-        "s3_url": [
-            "https://topiocqa.s3.us-east-2.amazonaws.com/passage_embeddings/all_history/wikipedia_passages_{}.pkl".format(i)
-            for i in range(50)
+        "url": [
+            "https://zenodo.org/record/6153453/files/passage_embeddings/all_history/wikipedia_passages_{}.pkl".format(i)
+            for i in range(25)
+        ] + [
+            "https://zenodo.org/record/6153959/files/passage_embeddings/all_history/wikipedia_passages_{}.pkl".format(i)
+            for i in range(25, 50)
         ],
         "original_ext": ".pkl",
-        "desc": "Encoded passages for all history variant",
+        "desc": "Wikipedia passage embeddings for all_history passages",
     },
     "passage_embeddings.original.wikipedia_passages": {
-        "s3_url": [
-            "https://topiocqa.s3.us-east-2.amazonaws.com/passage_embeddings/original/wikipedia_passages_{}.pkl".format(i)
-            for i in range(50)
+        "url": [
+            "https://zenodo.org/record/6157968/files/passage_embeddings/original/wikipedia_passages_{}.pkl".format(i)
+            for i in range(25)
+        ] + [
+            "https://zenodo.org/record/6158757/files/passage_embeddings/original/wikipedia_passages_{}.pkl".format(i)
+            for i in range(25, 50)
         ],
         "original_ext": ".pkl",
-        "desc": "Encoded passages for original variant",
+        "desc": "Wikipedia passage embeddings for original passages",
     },
     "passage_embeddings.rewrites_t5_qrecc.wikipedia_passages": {
-        "s3_url": [
-            "https://topiocqa.s3.us-east-2.amazonaws.com/passage_embeddings/rewrites_t5_qrecc/wikipedia_passages_{}.pkl".format(i)
-            for i in range(50)
+        "url": [
+            "https://zenodo.org/record/6154952/files/passage_embeddings/rewrites_t5_qrecc/wikipedia_passages_{}.pkl".format(i)
+            for i in range(25)
+        ] + [
+            "https://zenodo.org/record/6156282/files/passage_embeddings/rewrites_t5_qrecc/wikipedia_passages_{}.pkl".format(i)
+            for i in range(25, 50)
         ],
         "original_ext": ".pkl",
-        "desc": "Encoded passages for rewrites variant",
+        "desc": "Wikipedia passage embeddings for rewrites passages",
     },
     "model_checkpoints.retriever.dpr.all_history.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/retriever/dpr_retriever_all_history",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/retriever/dpr_retriever_all_history",
         "original_ext": ".pt",
-        "desc": "Retriever DPR model checkpoint for all history variant",
+        "desc": "Retriever DPR model checkpoint for all_history passages",
     },
     "model_checkpoints.retriever.dpr.original.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/retriever/dpr_retriever_original",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/retriever/dpr_retriever_original",
         "original_ext": ".pt",
-        "desc": "Retriever DPR model checkpoint for original variant",
+        "desc": "Retriever DPR model checkpoint for original passages",
     },
     "model_checkpoints.retriever.dpr.rewrites_t5_qrecc.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/retriever/dpr_retriever_rewrites_t5_qrecc",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/retriever/dpr_retriever_rewrites_t5_qrecc",
         "original_ext": ".pt",
-        "desc": "Retriever DPR model checkpoint for rewrites variant",
+        "desc": "Retriever DPR model checkpoint for rewrites passages",
     },
     "model_checkpoints.reader.dpr_reader.dpr_retriever.all_history.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_reader/dpr_retriever/all_history",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/dpr_reader/dpr_retriever/all_history",
         "original_ext": ".pt",
-        "desc": "DPR Reader model checkpoint for all history variant with DPR Retriever",
+        "desc": "Reader DPR model checkpoint for all_history passages, trained on the Retriever DPR results",
     },
     "model_checkpoints.reader.dpr_reader.dpr_retriever.original.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_reader/dpr_retriever/original",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/dpr_reader/dpr_retriever/original",
         "original_ext": ".pt",
-        "desc": "DPR Reader model checkpoint for original variant with DPR Retriever",
+        "desc": "Reader DPR model checkpoint for original passages, trained on the Retriever DPR results",
     },
     "model_checkpoints.reader.dpr_reader.dpr_retriever.rewrites_t5_qrecc.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_reader/dpr_retriever/rewrites_t5_qrecc",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/dpr_reader/dpr_retriever/rewrites_t5_qrecc",
         "original_ext": ".pt",
-        "desc": "DPR Reader model checkpoint for rewrites variant with DPR Retriever",
+        "desc": "Reader DPR model checkpoint for rewrites passages, trained on the Retriever DPR results",
     },
     "model_checkpoints.reader.dpr_reader.bm25_retriever.all_history.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_reader/bm25_retriever/all_history",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/dpr_reader/bm25_retriever/all_history",
         "original_ext": ".pt",
-        "desc": "DPR Reader model checkpoint for all history variant with BM25 Retriever",
+        "desc": "Reader DPR model checkpoint for all_history passages, trained on the BM25 Retriever results",
     },
     "model_checkpoints.reader.dpr_reader.bm25_retriever.original.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_reader/bm25_retriever/original",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/dpr_reader/bm25_retriever/original",
         "original_ext": ".pt",
-        "desc": "DPR Reader model checkpoint for original variant with BM25 Retriever",
+        "desc": "Reader DPR model checkpoint for original passages, trained on the BM25 Retriever results",
     },
     "model_checkpoints.reader.dpr_reader.bm25_retriever.rewrites_t5_qrecc.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/dpr_reader/bm25_retriever/rewrites_t5_qrecc",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/dpr_reader/bm25_retriever/rewrites_t5_qrecc",
         "original_ext": ".pt",
-        "desc": "DPR Reader model checkpoint for rewrites variant with BM25 Retriever",
+        "desc": "Reader DPR model checkpoint for rewrites passages, trained on the BM25 Retriever results",
     },
     "model_checkpoints.reader.fid.dpr_retriever.all_history.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/dpr_retriever/all_history",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/fid/dpr_retriever/all_history",
         "original_ext": ".zip",
-        "desc": "FiD model checkpoint for all history variant with DPR Retriever",
+        "desc": "FiD model checkpoint for all_history passages, trained on the Retriever DPR results",
     },
     "model_checkpoints.reader.fid.dpr_retriever.original.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/dpr_retriever/original",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/fid/dpr_retriever/original",
         "original_ext": ".zip",
-        "desc": "FiD model checkpoint for original variant with DPR Retriever",
+        "desc": "FiD model checkpoint for original passages, trained on the Retriever DPR results",
     },
     "model_checkpoints.reader.fid.dpr_retriever.rewrites_t5_qrecc.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/dpr_retriever/rewrites_t5_qrecc",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/fid/dpr_retriever/rewrites_t5_qrecc",
         "original_ext": ".zip",
-        "desc": "FiD model checkpoint for rewrites variant with DPR Retriever",
+        "desc": "FiD model checkpoint for rewrites passages, trained on the Retriever DPR results",
     },
     "model_checkpoints.reader.fid.bm25_retriever.all_history.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/bm25_retriever/all_history",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/fid/bm25_retriever/all_history",
         "original_ext": ".zip",
-        "desc": "FiD model checkpoint for all history variant with BM25 Retriever",
+        "desc": "FiD model checkpoint for all_history passages, trained on the BM25 Retriever results",
     },
     "model_checkpoints.reader.fid.bm25_retriever.original.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/bm25_retriever/original",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/fid/bm25_retriever/original",
         "original_ext": ".zip",
-        "desc": "FiD model checkpoint for original variant with BM25 Retriever",
+        "desc": "FiD model checkpoint for original passages, trained on the BM25 Retriever results",
     },
     "model_checkpoints.reader.fid.bm25_retriever.rewrites_t5_qrecc.checkpoint": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/model_checkpoints/reader/fid/bm25_retriever/rewrites_t5_qrecc",
+        "url": "https://zenodo.org/record/6151076/files/model_checkpoints/reader/fid/bm25_retriever/rewrites_t5_qrecc",
         "original_ext": ".zip",
         "desc": "FiD model checkpoint for rewrites variant with BM25 Retriever",
     },
     "results.retriever.dpr.all_history.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_all_history_train.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/dpr/topiocqa_all_history_train.json",
         "original_ext": ".json",
-        "desc": "Retriever DPR results for all history variant on train set",
+        "desc": "Retriever DPR results for all_history variant on train set",
     },
     "results.retriever.dpr.all_history.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_all_history_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/dpr/topiocqa_all_history_dev.json",
         "original_ext": ".json",
-        "desc": "Retriever DPR results for all history variant on dev set",
+        "desc": "Retriever DPR results for all_history variant on dev set",
     },
     "results.retriever.dpr.original.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_original_train.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/dpr/topiocqa_original_train.json",
         "original_ext": ".json",
         "desc": "Retriever DPR results for original variant on train set",
     },
     "results.retriever.dpr.original.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_original_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/dpr/topiocqa_original_dev.json",
         "original_ext": ".json",
         "desc": "Retriever DPR results for original variant on dev set",
     },
     "results.retriever.dpr.rewrites_t5_qrecc.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_rewrites_t5_qrecc_train.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/dpr/topiocqa_rewrites_t5_qrecc_train.json",
         "original_ext": ".json",
         "desc": "Retriever DPR results for rewrites variant on train set",
     },
     "results.retriever.dpr.rewrites_t5_qrecc.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/DPR/topiocqa_rewrites_t5_qrecc_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/dpr/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
         "desc": "Retriever DPR results for rewrites variant on dev set",
     },
     "results.retriever.bm25.all_history.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_all_history_train.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/bm25/topiocqa_all_history_train.json",
         "original_ext": ".json",
-        "desc": "Retriever BM25 results for all history variant on train set",
+        "desc": "Retriever BM25 results for all_history variant on train set",
     },
     "results.retriever.bm25.all_history.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_all_history_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/bm25/topiocqa_all_history_dev.json",
         "original_ext": ".json",
-        "desc": "Retriever BM25 results for all history variant on dev set",
+        "desc": "Retriever BM25 results for all_history variant on dev set",
     },
     "results.retriever.bm25.original.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_original_train.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/bm25/topiocqa_original_train.json",
         "original_ext": ".json",
         "desc": "Retriever BM25 results for original variant on train set",
     },
     "results.retriever.bm25.original.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_original_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/bm25/topiocqa_original_dev.json",
         "original_ext": ".json",
         "desc": "Retriever BM25 results for original variant on dev set",
     },
     "results.retriever.bm25.rewrites_t5_qrecc.train": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_rewrites_t5_qrecc_train.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/bm25/topiocqa_rewrites_t5_qrecc_train.json",
         "original_ext": ".json",
         "desc": "Retriever BM25 results for rewrites variant on train set",
     },
     "results.retriever.bm25.rewrites_t5_qrecc.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/retriever/BM25/topiocqa_rewrites_t5_qrecc_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/retriever/bm25/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
         "desc": "Retriever BM25 results for rewrites variant on dev set",
     },
     "results.reader.dpr_reader.dpr_retriever.all_history.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/DPR_retriever/topiocqa_all_history_dev.json",
-        "original_ext": ".json",
-        "desc": "DPR Reader results using DPR Retriever results for all history variant on dev set",
-    },
-    "results.reader.dpr_reader.dpr_retriever.original.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/DPR_retriever/topiocqa_original_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/reader/dpr_reader/dpr_retriever/topiocqa_all_history_dev.json",
         "original_ext": ".json",
         "desc": "DPR Reader results using DPR Retriever results for original variant on dev set",
     },
-    "results.reader.dpr_reader.dpr_retriever.rewrites_t5_qrecc.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/DPR_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
-        "original_ext": ".json",
-        "desc": "DPR Reader results using DPR Retriever results for rewrites variant on dev set",
-    },
-    "results.reader.dpr_reader.bm25_retriever.all_history.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/BM25_retriever/topiocqa_all_history_dev.json",
+    "results.reader.dpr_reader.dpr_retriever.original.dev": {
+        "url": "https://zenodo.org/record/6153434/files/results/reader/dpr_reader/dpr_retriever/topiocqa_original_dev.json",
         "original_ext": ".json",
         "desc": "DPR Reader results using BM25 Retriever results for all history variant on dev set",
     },
+    "results.reader.dpr_reader.dpr_retriever.rewrites_t5_qrecc.dev": {
+        "url": "https://zenodo.org/record/6153434/files/results/reader/dpr_reader/dpr_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
+        "original_ext": ".json",
+        "desc": "DPR Reader results using BM25 Retriever results for rewrites variant on dev set",
+    },
+    "results.reader.dpr_reader.bm25_retriever.all_history.dev": {
+        "url": "https://zenodo.org/record/6153434/files/results/reader/dpr_reader/bm25_retriever/topiocqa_all_history_dev.json",
+        "original_ext": ".json",
+        "desc": "DPR Reader results using BM25 Retriever results for all_history variant on dev set",
+    },
     "results.reader.dpr_reader.bm25_retriever.original.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/BM25_retriever/topiocqa_original_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/reader/dpr_reader/bm25_retriever/topiocqa_original_dev.json",
         "original_ext": ".json",
         "desc": "DPR Reader results using BM25 Retriever results for original variant on dev set",
     },
     "results.reader.dpr_reader.bm25_retriever.rewrites_t5_qrecc.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/DPR/BM25_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/reader/dpr_reader/bm25_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
         "desc": "DPR Reader results using BM25 Retriever results for rewrites variant on dev set",
     },
     "results.reader.fid.dpr_retriever.all_history.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/DPR_retriever/topiocqa_all_history_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/reader/fid/dpr_retriever/topiocqa_all_history_dev.json",
         "original_ext": ".json",
-        "desc": "FiD results using DPR Retriever results for all history variant on dev set",
+        "desc": "Reader FID results using DPR Retriever results for all_history variant on dev set",
     },
     "results.reader.fid.dpr_retriever.original.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/DPR_retriever/topiocqa_original_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/reader/fid/dpr_retriever/topiocqa_original_dev.json",
         "original_ext": ".json",
-        "desc": "FiD results using DPR Retriever results for original variant on dev set",
+        "desc": "Reader FID results using DPR Retriever results for original variant on dev set",
     },
     "results.reader.fid.dpr_retriever.rewrites_t5_qrecc.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/DPR_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/reader/fid/dpr_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
-        "desc": "FiD results using DPR Retriever results for rewrites variant on dev set",
+        "desc": "Reader FID results using DPR Retriever results for rewrites variant on dev set",
     },
     "results.reader.fid.bm25_retriever.all_history.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/BM25_retriever/topiocqa_all_history_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/reader/fid/bm25_retriever/topiocqa_all_history_dev.json",
         "original_ext": ".json",
-        "desc": "FiD results using BM25 Retriever results for all history variant on dev set",
+        "desc": "Reader FID results using BM25 Retriever results for all_history variant on dev set",
     },
     "results.reader.fid.bm25_retriever.original.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/BM25_retriever/topiocqa_original_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/reader/fid/bm25_retriever/topiocqa_original_dev.json",
         "original_ext": ".json",
-        "desc": "FiD results using BM25 Retriever results for original variant on dev set",
+        "desc": "Reader FID results using BM25 Retriever results for original variant on dev set",
     },
     "results.reader.fid.bm25_retriever.rewrites_t5_qrecc.dev": {
-        "s3_url": "https://topiocqa.s3.us-east-2.amazonaws.com/results/reader/FiD/BM25_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
+        "url": "https://zenodo.org/record/6153434/files/results/reader/fid/bm25_retriever/topiocqa_rewrites_t5_qrecc_dev.json",
         "original_ext": ".json",
-        "desc": "FiD results using BM25 Retriever results for rewrites variant on dev set",
+        "desc": "Reader FID results using BM25 Retriever results for rewrites variant on dev set",
     },
 }
 
 
 def download_resource(
-    s3_url: str, original_ext: str, resource_key: str, out_dir: str
+    url: str, original_ext: str, resource_key: str, out_dir: str
 ) -> Tuple[str, str]:
-    logger.info("Requested resource from %s", s3_url)
+    logger.info("Requested resource from %s", url)
     path_names = resource_key.split(".")
 
     if out_dir:
@@ -369,22 +378,22 @@ def download_resource(
 
     local_file = os.path.abspath(os.path.join(save_root, path_names[-1] +  original_ext))
 
-    wget.download(s3_url, out=local_file)
+    wget.download(url, out=local_file)
 
     logger.info("Downloaded to %s", local_file)
 
     return save_root, local_file
 
 
-def download_file(s3_url: str, out_dir: str, file_name: str):
-    logger.info("Loading from %s", s3_url)
+def download_file(url: str, out_dir: str, file_name: str):
+    logger.info("Loading from %s", url)
     local_file = os.path.join(out_dir, file_name)
 
     if os.path.exists(local_file):
         logger.info("File already exist %s", local_file)
         return
 
-    wget.download(s3_url, out=local_file)
+    wget.download(url, out=local_file)
     logger.info("Downloaded to %s", local_file)
 
 
@@ -400,14 +409,14 @@ def download(resource_key: str, out_dir: str = None):
         return []
     download_info = RESOURCES_MAP[resource_key]
 
-    s3_url = download_info["s3_url"]
+    url = download_info["url"]
 
     save_root_dir = None
     data_files = []
-    if isinstance(s3_url, list):
-        for i, url in enumerate(s3_url):
+    if isinstance(url, list):
+        for i, item_url in enumerate(url):
             save_root_dir, local_file = download_resource(
-                url,
+                item_url,
                 download_info["original_ext"],
                 "{}_{}".format(resource_key, i),
                 out_dir,
@@ -415,7 +424,7 @@ def download(resource_key: str, out_dir: str = None):
             data_files.append(local_file)
     else:
         save_root_dir, local_file = download_resource(
-            s3_url,
+            url,
             download_info["original_ext"],
             resource_key,
             out_dir,
