@@ -1,5 +1,7 @@
 # TopiOCQA: Open-domain Conversational Question Answering with Topic Switching
 
+[![arxiv](https://img.shields.io/badge/arXiv-2110.00768-b31b1b.svg)](https://arxiv.org/abs/2110.00768)
+
 This repository contains code and data for reproducing the results of our paper:
 
 Vaibhav Adlakha, Shehzaad Dhuliawala, Kaheer Suleman, Harm de Vries, Siva Reddy. [TopiOCQA: Open-domain Conversational Question Answering with Topic Switching](https://arxiv.org/abs/2110.00768).
