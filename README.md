@@ -10,11 +10,12 @@ To download and interactively explore the dataset, please visit the [project pag
 
 To cite this work, please use the following citation:
 ```
-@inproceedings{adlakha2020topiocqa,
+@inproceedings{adlakha2022topiocqa,
   title={Topi{OCQA}: Open-domain Conversational Question Answering with Topic Switching},
   author={Adlakha, Vaibhav and Dhuliawala, Shehzaad and Suleman, Kaheer and de Vries, Harm and Reddy, Siva},
-  booktitle={arXiv preprint arXiv:2110.00768},
-  year={2020}
+  journal={Transactions of the Association for Computational Linguistics},
+  year={2022},
+  url={https://arxiv.org/abs/2110.00768},
 }
 ```
 
