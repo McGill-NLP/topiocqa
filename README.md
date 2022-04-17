@@ -14,8 +14,15 @@ To cite this work, please use the following citation:
   title={Topi{OCQA}: Open-domain Conversational Question Answering with Topic Switching},
   author={Adlakha, Vaibhav and Dhuliawala, Shehzaad and Suleman, Kaheer and de Vries, Harm and Reddy, Siva},
   journal={Transactions of the Association for Computational Linguistics},
+  volume = {10},
+  pages = {468-483},
+  year = {2022},
+  month = {04},
   year={2022},
-  url={https://arxiv.org/abs/2110.00768},
+  issn = {2307-387X},
+  doi = {10.1162/tacl_a_00471},
+  url = {https://doi.org/10.1162/tacl\_a\_00471},
+  eprint = {https://direct.mit.edu/tacl/article-pdf/doi/10.1162/tacl\_a\_00471/2008126/tacl\_a\_00471.pdf},
 }
 ```
 
