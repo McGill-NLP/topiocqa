@@ -1,0 +1,682 @@
+{
+    "updated": 1533969381.216775,
+    "config": {
+      "count_failed_submissions": true,
+      "allow_orphans": true,
+      "submission_tag": "squad-2.0-test-submit",
+      "make_predictions_public": false,
+      "max_submissions_total": 20,
+      "allow_multiple_models": true,
+      "log_worksheet_uuid": "0x75a2fb819f364b0f9453d5d63585b878",
+      "predict": {
+        "depth": 10,
+        "tag": "nurdauqs-test-predict",
+        "mimic": [
+          {
+            "new": "0x4fd2e12372a444ed90ba3f186794777c",
+            "old": "0xb30d937a18574073903bb38b382aab03"
+          }
+        ],
+        "metadata": {}
+      },
+      "evaluate": {
+        "tag": "nurdauqs-test-eval",
+        "command": "python evaluate-v2.0.py data.json predictions.json -o eval.json",
+        "dependencies": [
+          {
+            "parent_path": "",
+            "parent_uuid": "0x6b567e1cf2e041ec80d7098f031c5c9e",
+            "child_path": "evaluate-v2.0.py"
+          },
+          {
+            "parent_path": "",
+            "parent_uuid": "0x4fd2e12372a444ed90ba3f186794777c",
+            "child_path": "data.json"
+          },
+          {
+            "parent_path": "",
+            "parent_uuid": "{predict}",
+            "child_path": "predictions.json"
+          }
+        ],
+        "metadata": {
+          "request_docker_image": "codalab/ubuntu:1.9"
+        }
+      },
+      "quota_period_seconds": 86400,
+      "score_specs": [
+        {
+          "name": "f1",
+          "key": "/eval.json:f1"
+        },
+        {
+          "name": "exact_match",
+          "key": "/eval.json:exact"
+        }
+      ],
+      "host": "https://worksheets.codalab.org",
+      "max_submissions_per_period": 5,
+      "max_leaderboard_size": 10000,
+      "refresh_period_seconds": 60,
+      "metadata": {
+        "name": "SQuAD v2.0 Competition Leaderboard"
+      }
+    },
+    "leaderboard": [
+      {
+        "submission": {
+          "worksheet": "0x11937f6271e14dfabb2fae4e2a1c8761-ensemble",
+          "description": "RoBERTa + AT + KD (ensemble) (Zhuiyi Technology) https://arxiv.org/abs/1909.10772",
+          "created": "1567666800"
+        },
+        "scores": {
+          "in_domain_f1": 91.4,
+          "out_of_domain_f1": 89.2,
+          "overall_f1": 90.7
+        }
+      },
+      {
+        "scores": {
+          "in_domain_f1": 91.5,
+          "out_of_domain_f1": 88.8,
+          "overall_f1": 90.7
+        },
+        "submission": {
+          "created": "1587528000",
+          "description": "TR-MT (ensemble) (WeChatAI)",
+          "worksheet": "0xc667a31767614e7f8fc834efed841e08-ensemble"
+        }
+      },
+      {
+        "submission": {
+          "worksheet": "0x11937f6271e14dfabb2fae4e2a1c8761-single",
+          "description": "RoBERTa + AT + KD (single model) (Zhuiyi Technology) https://arxiv.org/abs/1909.10772",
+          "created": "1567666800"
+        },
+        "scores": {
+          "in_domain_f1": 90.9,
+          "out_of_domain_f1": 89.2,
+          "overall_f1": 90.4
+        }
+      },
+      {
+        "submission": {
+          "worksheet": "0x0b03adf0e562427d9dcce81541fa1b59-single",
+          "description": "TR-MT (ensemble) (WeChatAI)",
+          "created": "1577854800"
+        },
+        "scores": {
+          "in_domain_f1": 91.1,
+          "out_of_domain_f1": 87.9,
+          "overall_f1": 90.2
+        }
+      },
+      {
+        "submission": {
+          "description": "Google SQuAD 2.0 + MMFT (ensemble) (MSRA + SDRG)",
+          "created": 1553888701,
+          "user_name": "coqa-barton",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 89.9,
+          "out_of_domain_f1": 88.0,
+          "overall_f1": 89.4
+        }
+      },
+      {
+        "submission": {
+          "worksheet": "0x8214d8fceefa431688ec9ca22f7fe3ce-single",
+          "description": "TR-MT (single model) (WeChatAI)",
+          "created": "1576645200"
+        },
+        "scores": {
+          "in_domain_f1": 90.4,
+          "out_of_domain_f1": 86.8,
+          "overall_f1": 89.3
+        }
+      },
+      {
+        "submission": {
+          "worksheet": "0xbf56c4359c2342c9a4003088371a869b-2019-09-13",
+          "description": "XLNet + Augmentation (single model) (Xiaoming) https://github.com/stevezheng23/xlnet_extension_tf",
+          "created": "1568358000"
+        },
+        "scores": {
+          "in_domain_f1": 89.9,
+          "out_of_domain_f1": 86.9,
+          "overall_f1": 89.0
+        }
+      },
+      {
+        "submission": {
+          "description": "Google SQuAD 2.0 + MMFT (single model) (MSRA + SDRG)",
+          "created": 1553888701,
+          "user_name": "coqa-barton",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 88.5,
+          "out_of_domain_f1": 86.0,
+          "overall_f1": 87.8
+        }
+      },
+      {
+        "submission": {
+          "description": "ConvBERT (ensemble) (Joint Laboratory of HIT and iFLYTEK Research)",
+          "created": 1553888701,
+          "user_name": "zpchen_3-CoQA_ensemble_model",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 88.7,
+          "out_of_domain_f1": 85.4,
+          "overall_f1": 87.8
+        }
+      },
+      {
+        "submission": {
+          "description": "BERT + MMFT + ADA (ensemble) (Microsoft Research Asia)",
+          "created": 1548463956,
+          "user_name": "nya.codalab.data.0-coqa-work",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 87.5,
+          "out_of_domain_f1": 85.3,
+          "overall_f1": 86.8
+        }
+      },
+      {
+        "submission": {
+          "description": "ConvBERT (single model) (Joint Laboratory of HIT and iFLYTEK Research)",
+          "created": 1553807323,
+          "user_name": "zpchen_3-CoQA_single_model",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 87.7,
+          "out_of_domain_f1": 84.6,
+          "overall_f1": 86.8
+        }
+      },
+      {
+        "submission": {
+          "description": "BERT + MMFT + ADA (single model) (Microsoft Research Asia)",
+          "created": 1548121867,
+          "user_name": "fnwmrc-coqa-nya",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 86.4,
+          "out_of_domain_f1": 81.9,
+          "overall_f1": 85.0
+        }
+      },
+      {
+        "scores": {
+          "in_domain_f1": 85.7,
+          "out_of_domain_f1": 81.7,
+          "overall_f1": 84.6
+        },
+        "submission": {
+          "created": "1588046400",
+          "description": "XLNet + MMFT + ADA (single model) (NEUKG)",
+          "worksheet": "0xc9094f955e9a482abff10ae7b77b1678-single"
+        }
+      },
+      {
+        "submission": {
+          "worksheet": "0xb1ab4d24d93a46679ce7a7c3febbdbcf",
+          "description": "BERT + AttentionFusionNet (single model) (Beijing Kingsoft AI Lab)",
+          "created": "1566802800"
+        },
+        "scores": {
+          "in_domain_f1": 85.4,
+          "out_of_domain_f1": 77.3,
+          "overall_f1": 83.0
+        }
+      },
+      {
+        "submission": {
+          "description": "BERT + Answer Verification (single model) (Sogou Search AI Group) https://github.com/sogou/SMRCToolkit",
+          "created": 1546564583,
+          "user_name": "dengchao-coqa-sub1",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 83.8,
+          "out_of_domain_f1": 80.2,
+          "overall_f1": 82.8
+        }
+      },
+      {
+        "submission": {
+          "description": "BERT with History Augmented Query (single model) (Fudan University NLP Lab)",
+          "created": 1546820211,
+          "user_name": "xkhu-bert-hist-3",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 82.7,
+          "out_of_domain_f1": 78.6,
+          "overall_f1": 81.5
+        }
+      },
+      {
+        "submission": {
+          "description": "BERT Large Finetuned Baseline (single model) (Anonymous)",
+          "created": 1549003507,
+          "user_name": "scissorsy-boyang-coqa-v4",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 82.6,
+          "out_of_domain_f1": 78.4,
+          "overall_f1": 81.4
+        }
+      },
+      {
+        "submission": {
+          "description": "BERT Large Augmented (single model) (Microsoft Dynamics 365 AI Research)",
+          "created": 1548121867,
+          "user_name": "studyfang-coqa-bert",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 82.5,
+          "out_of_domain_f1": 77.6,
+          "overall_f1": 81.1
+        }
+      },
+      {
+        "submission": {
+          "description": "D-AoA + BERT (single model) (Joint Laboratory of HIT and iFLYTEK Research)",
+          "created": 1544680329,
+          "user_name": "sivareddy-coqa-zpchen",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 81.4,
+          "out_of_domain_f1": 77.3,
+          "overall_f1": 80.2
+        }
+      },
+      {
+        "submission": {
+          "worksheet": "0x803eaaf7e636416380e818cfec61f6ba",
+          "description": "BERT Augmented + AoA (single model) (Netease Games AI Lab)",
+          "created": "1564642800"
+        },
+        "scores": {
+          "in_domain_f1": 81.1,
+          "out_of_domain_f1": 77.4,
+          "overall_f1": 80.0
+        }
+      },
+      {
+        "submission": {
+          "description": "CNet (single model) (Anonymous)",
+          "created": 1552267318,
+          "user_name": "qq2019-c2019",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 80.9,
+          "out_of_domain_f1": 77.1,
+          "overall_f1": 79.8
+        }
+      },
+      {
+        "submission": {
+          "description": "SDNet (ensemble) (Microsoft Speech and Dialogue Research Group) https://github.com/Microsoft/SDNet",
+          "created": 1543539993,
+          "user_name": "sivareddy",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 80.7,
+          "out_of_domain_f1": 75.9,
+          "overall_f1": 79.3
+        }
+      },
+      {
+        "submission": {
+          "description": "CQANet (single model) (Nanjing University)",
+          "created": 1550854347,
+          "user_name": "tracy-coqa-bert-large",
+          "num_period_submissions": 0,
+          "num_total_submissions": 2,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 80.2,
+          "out_of_domain_f1": 76.5,
+          "overall_f1": 79.1
+        }
+      },
+      {
+        "submission": {
+          "description": "CANet (single model) (Northwestern Polytechnical University)",
+          "created": 1557435432,
+          "user_name": "lrh000-CANet",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 80.1,
+          "out_of_domain_f1": 75.7,
+          "overall_f1": 78.9
+        }
+      },
+      {
+        "submission": {
+          "description": "BERT Finetuned Baseline (single model)",
+          "created": 1563079062,
+          "user_name": "helloWangYt-bertonCoQA",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 79.7,
+          "out_of_domain_f1": 76.3,
+          "overall_f1": 78.7
+        }
+      },
+      {
+        "submission": {
+          "description": "BERT w/ 2-context (single model) (NTT Media Intelligence Laboratories) https://arxiv.org/pdf/1905.12848",
+          "created": 1555219249,
+          "user_name": "coqa-yo-rs-kh-nk",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 79.8,
+          "out_of_domain_f1": 75.9,
+          "overall_f1": 78.7
+        }
+      },
+      {
+        "submission": {
+          "description": "BERT-base finetune (single model) (Tsinghua University CoAI Lab)",
+          "created": 1546195891,
+          "user_name": "KKnotalone-TransformerCoqa",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 79.8,
+          "out_of_domain_f1": 74.1,
+          "overall_f1": 78.1
+        }
+      },
+      {
+        "submission": {
+          "description": "Bert-FlowDelta (single model) (National Taiwan University, MiuLab) https://arxiv.org/abs/1908.05117",
+          "created": 1555713312,
+          "user_name": "exe1023-coqa_submit",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 79.2,
+          "out_of_domain_f1": 74.1,
+          "overall_f1": 77.7
+        }
+      },
+      {
+        "submission": {
+          "description": "GraphFlow (single model) (RPI and IBM Research) https://arxiv.org/pdf/1908.00059.pdf",
+          "created": 1551396181,
+          "user_name": "hugo-coqa-eval",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 78.4,
+          "out_of_domain_f1": 74.5,
+          "overall_f1": 77.3
+        }
+      },
+      {
+        "submission": {
+          "description": "SDNet (single model) (Microsoft Speech and Dialogue Research Group) https://github.com/Microsoft/SDNet",
+          "created": 1543268369,
+          "user_name": "sivareddy",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 78.0,
+          "out_of_domain_f1": 73.1,
+          "overall_f1": 76.6
+        }
+      },
+      {
+        "submission": {
+          "worksheet": "0x488a1f0f136b4c6d83e0e5c15bd7aef2",
+          "description": "Flow Framework (single model) (SIAT NLP Group)",
+          "created": "1567073673"
+        },
+        "scores": {
+          "in_domain_f1": 77.0,
+          "out_of_domain_f1": 73.1,
+          "overall_f1": 75.8
+        }
+      },
+      {
+        "submission": {
+          "description": "FlowQA (single model) (Allen Institute for Artificial Intelligence) https://arxiv.org/abs/1810.06683",
+          "created": 1538850800,
+          "user_name": "sivareddy",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 76.3,
+          "out_of_domain_f1": 71.8,
+          "overall_f1": 75.0
+        }
+      },
+      {
+        "submission": {
+          "description": "HisFurC + BERT (single model)",
+          "created": 1563338063,
+          "user_name": "cqa_summit1",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 76.0,
+          "out_of_domain_f1": 70.4,
+          "overall_f1": 74.4
+        }
+      },
+      {
+        "submission": {
+          "description": "RNet + PGNet + BERT (single model) (Nanjing University)",
+          "created": 1547491944,
+          "user_name": "tracy-coqa-0112",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 74.7,
+          "out_of_domain_f1": 70.0,
+          "overall_f1": 73.3
+        }
+      },
+      {
+        "submission": {
+          "description": "XyzNet (single model) (Beijing Normal University)",
+          "created": 1549003507,
+          "user_name": "sivareddy-coqa-peanut8-c",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 74.3,
+          "out_of_domain_f1": 68.8,
+          "overall_f1": 72.7
+        }
+      },
+      {
+        "submission": {
+          "description": "DrQA + marker features (single model) (Stanford University)",
+          "created": 1546195891,
+          "user_name": "sivareddy",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 71.6,
+          "out_of_domain_f1": 65.1,
+          "overall_f1": 69.7
+        }
+      },
+      {
+        "submission": {
+          "description": "BiDAF++ (single model) (Beijing University of Posts and Telecommunications)",
+          "created": 1544499041,
+          "user_name": "sivareddy",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 71.1,
+          "out_of_domain_f1": 65.5,
+          "overall_f1": 69.5
+        }
+      },
+      {
+        "submission": {
+          "description": "BiDAF++ (single model) (Allen Institute for Artificial Intelligence) https://arxiv.org/abs/1809.10735",
+          "created": 1538037635,
+          "user_name": "sivareddy",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 69.4,
+          "out_of_domain_f1": 63.8,
+          "overall_f1": 67.8
+        }
+      },
+      {
+        "submission": {
+          "description": "Bert Base Augmented (single model) (Fudan University NLP Lab)",
+          "created": 1542926782,
+          "user_name": "sivareddy",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 68.4,
+          "out_of_domain_f1": 61.8,
+          "overall_f1": 66.5
+        }
+      },
+      {
+        "submission": {
+          "description": "RNet_DotAtt + seq2seq with copy attention (single model) (University of Science and Technology of China)",
+          "created": 1545111857,
+          "user_name": "home-rowitzou",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 68.1,
+          "out_of_domain_f1": 62.3,
+          "overall_f1": 66.4
+        }
+      },
+      {
+        "submission": {
+          "description": "Simplified BiDAF++ (single model) (Peking University)",
+          "created": 1546195891,
+          "user_name": "beibeiyang-coqa_stacked_attention",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 68.7,
+          "out_of_domain_f1": 60.5,
+          "overall_f1": 66.3
+        }
+      },
+      {
+        "submission": {
+          "description": "DrQA + seq2seq with copy attention (single model) (Stanford University) https://arxiv.org/abs/1808.07042",
+          "created": 1534840835,
+          "user_name": "sivareddy",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 67.029,
+          "out_of_domain_f1": 60.366,
+          "overall_f1": 65.081
+        }
+      },
+      {
+        "submission": {
+          "description": "Vanilla DrQA (single model) (Stanford University) https://arxiv.org/abs/1808.07042",
+          "created": 1534840835,
+          "user_name": "sivareddy",
+          "num_period_submissions": 0,
+          "num_total_submissions": 1,
+          "public": false
+        },
+        "scores": {
+          "in_domain_f1": 54.5,
+          "out_of_domain_f1": 47.9,
+          "overall_f1": 52.6
+        }
+      }
+    ]
+  }
