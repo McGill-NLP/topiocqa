@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<style>
+    .reload {
+        font-family: Lucida Sans Unicode
+    }
+</style>
+<html lang="{{ site.lang | default: " en-US" }}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TopiOCQA leaderboard</title>
+    <link rel="icon" href="https://mcgill-nlp.github.io/topiocqa/topiocqa_no_background.png">
+
+    {% seo %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style"
+        type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    {% include head-custom.html %}
+</head>
+
+<body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner" style="background-image: linear-gradient(120deg, #d7816a, #bd4f6c);">
+        <h2 class="project-name"><img src="topiocqa_no_background.png" alt="logo" width="100" height="100"
+                style="margin-bottom: -20px;" />TopiOCQA: Open-domain Conversational Question Answering with Topic
+            Switching</h2>
+        <h2 class="project-tagline">Vaibhav Adlakha, Shehzaad Dhuliawala, Kaheer Suleman, Harm de Vries, Siva Reddy</h2>
+        {% if site.github.is_project_page %}
+        <a href="https://arxiv.org/abs/2110.00768" target='_blank' class="btn">View paper on arXiv</a>
+        {% endif %}
+        <a href="https://github.com/McGill-NLP/topiocqa" target='_blank' class="btn">View code on GitHub</a>
+        <a href="https://mcgill-nlp.github.io/topiocqa/topiocqa.zip" class="btn">Download dataset</a>
+        {% if site.show_downloads %}
+        <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
+        {% endif %}
+    </header>
+
+    <main id="content" class="main-content" role="main">
+        <h1 class="dataset-explorer" style="color: #d7816a;">Leaderboard</h1>
+        <div id="leaderboard-container" class="container"></div>
+        <script>
+            function renderTable(data) {
+                var htmlString = "<table class='table table-striped'><tr><th>Description</th><th>F1 Score</th></tr>";
+                for (var i = 0; i < data.leaderboard.length; i++) {
+                    htmlString += "<tr><td>" + data.leaderboard[i].submission.description + "</td><td>" + data.leaderboard[i].scores.overall_f1 + "</td></tr>";
+                }
+            htmlString += "</table>";
+            htmlString += "<p>Last updated: " + data.updated_string + "</p>";
+            return htmlString;
+            }
+        </script>
+        <script id="template" type="x-tmpl-mustache">
+            <h1>{{config.metadata.name}}</h1>
+            <p>Last updated: {{updated_string}}</p>
+
+            <!-- <div class="row">
+              <h1>{{config.metadata.name}}</h1>
+              <table class="table table-striped">
+                <tr>
+                  <th>Description</th>
+                  <th>F1 Score</th>
+                </tr>
+                {{#leaderboard}}
+                <tr>
+                  <td>{{submission.description}}</td>
+                  <td>{{scores.overall_f1}}</td>
+                </tr>
+                {{/leaderboard}}
+              </table>
+              <p>Last updated: {{updated_string}}</p>
+            </div> -->
+            
+                </script>
+        <script src="https://unpkg.com/mustache@latest"></script>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"
+            integrity="sha256-iaqfO5ue0VbSGcEiQn+OeXxnxAMK2+QgHXIDA5bWtGI=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            (function ($) {
+
+                var LEADERBOARD_JSON = 'out.json';
+
+                // Preload the Mustache template
+                var template = $('#template').html();
+                // console.log(template);
+                Mustache.parse(template);   // optional, speeds up future uses
+
+                // Fetch the leaderboard JSON
+                $.getJSON(LEADERBOARD_JSON, function (data) {
+
+                    // Preprocess data
+                    console.log(data);
+                    // for (var i = 0; i < data.leaderboard.length; i++) {
+                    //     var item = data.leaderboard[i];
+                    //     item.url = data.config.host + '/bundles/' + item.bundle.id + '/';
+                    //     item.short_id = item.bundle.id.slice(0, 2 + 8);
+                    //     switch (item.bundle.state) {
+                    //         case 'ready':
+                    //             item.status = 'success';
+                    //             break;
+                    //         case 'created':
+                    //             item.status = 'running';
+                    //             break;
+                    //         default:
+                    //             item.status = item.bundle.state;
+                    //             break;
+                    //     }
+                    // }
+
+                    data.updated_string = new Date(data.updated * 1000);
+                    console.log(data);
+
+                    // Render Mustache template in the container div
+                    var view = {
+                        title: "Joe",
+                    };
+                    var rendered = Mustache.render("<h1>{{config.metadata.name}}</h1>", data);
+                    var rendered2 = Mustache.render("{{title}} spends.", view);
+                    console.log(rendered);
+                    console.log(rendered2);
+                    var rendered3 = renderTable(data);
+                    console.log(rendered3);
+                    $('#leaderboard-container').html(rendered3);
+
+                });
+
+            })(jQuery);
+        </script>
+
+        <p>For queries and clarifications please contact <b> vaibhav.adlakha (at) mila (dot) quebec </b></p>
+        {{ content }}
+
+        <footer class="site-footer">
+            {% if site.github.is_project_page %}
+            <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name
+                    }}</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name
+                    }}</a>.</span>
+            {% endif %}
+            <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub
+                    Pages</a>.</span>
+        </footer>
+    </main>
+</body>
+
+</html>
