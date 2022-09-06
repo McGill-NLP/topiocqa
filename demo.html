@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<style>
+  .reload {
+    font-family: Lucida Sans Unicode
+  }
+
+  body {
+    margin-top: 20px;
+  }
+
+  .chat-online {
+    color: #34ce57
+  }
+
+  .chat-offline {
+    color: #e4606d
+  }
+
+  .chat-messages {
+    display: flex;
+    flex-direction: column;
+    max-height: 800px;
+    overflow-y: scroll
+  }
+
+  .chat-message-left,
+  .chat-message-right {
+    display: flex;
+    flex-shrink: 0
+  }
+
+  .chat-message-left {
+    margin-right: auto
+  }
+
+  .chat-message-right {
+    flex-direction: row-reverse;
+    margin-left: auto
+  }
+
+  .py-3 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .px-4 {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+  }
+
+  .flex-grow-0 {
+    flex-grow: 0 !important;
+  }
+
+  .border-top {
+    border-top: 1px solid #dee2e6 !important;
+  }
+
+  .btn-jekyll {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+  }
+
+  .btn-jekyll:hover {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-jekyll+.btn-jekyll {
+    margin-left: 1rem;
+  }
+
+  @media screen and (min-width: 64em) {
+    .btn-jekyll {
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  @media screen and (min-width: 42em) and (max-width: 64em) {
+    .btn-jekyll {
+      padding: 0.6rem 0.9rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media screen and (max-width: 42em) {
+    .btn-jekyll {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .btn-jekyll+.btn-jekyll {
+      margin-top: 1rem;
+      margin-left: 0;
+    }
+  }
+
+  .project-name-jekyll {
+    font-weight: bold;
+    line-height: 1.5;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .project-tagline-jekyll {
+    line-height: 1.50;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 0.83em;
+  }
+
+  .btn-jekyll {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+  }
+
+  .position-relative {
+    min-height: inherit;
+    height: 100%
+  }
+
+  .chat-messages {
+    min-height: inherit;
+    height: 100%;
+  }
+
+  .card {
+    margin-top: 20px;
+  }
+
+  .split-pane {
+    min-height: 40em;
+  }
+</style>
+<script>
+  function sendQuestion() {
+    var question = $('#text-input').val();
+    // console.log(question);
+    var prevConv = [];
+    $(".chat-message").each(function () { prevConv.push($(this).text()) });
+    console.log(prevConv);
+
+    var data = {
+      'question': question,
+      'prevConv': prevConv
+    };
+    $.ajax({
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        // 'Access-Control-Allow-Origin': '*'
+      },
+      url: 'https://5du8ytlzg9.execute-api.us-east-2.amazonaws.com/default/topiocqaGetBotResponse',
+      type: 'POST',
+      dataType: 'json',
+      data: JSON.stringify(data),
+      success: function (response) {
+        // console.log(response);
+        body = JSON.parse(response['body']);
+        console.log(body);
+        $('#text-input').val('');
+        $('#chat').append('<div class="chat-message-left pb-4"><div><img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="You" width="40" height="40"></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3"><div class="font-weight-bold mb-1">You</div><span class="chat-message">' + question + '</span></div></div>');
+        $('#chat').append('<div class="chat-message-right mb-4"><div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Bot" width="40" height="40"></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3"><div class="font-weight-bold mb-1">Bot</div><span class="chat-message">' + body["answer"] + '</span></div></div>');
+        $('#chat').scrollTop($('#chat')[0].scrollHeight);
+        const myNode = document.getElementById("retrieved-docs");
+        myNode.textContent = '';
+        for (var i = 0; i < body["passages"].length; i++) {
+          var title = body["passages"][i]["title"].split(' [SEP] ')[0];
+          var section_title = body["passages"][i]["title"].split(' [SEP] ')[1];
+
+          $('#retrieved-docs').append('<div class="chat-message-right pb-4 retrieved-doc"><div class="flex-shrink-1 bg-light rounded py-2 px-3"><div class="font-weight-bold mb-1">Title: ' + title + '</div><div class="font-weight-bold mb-1">Section: ' + section_title + '</div>' + body["passages"][i]["text"] + '</div></div>');
+        }
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+</script>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <title>TopiOCQA</title>
+  <link rel="icon" href="https://mcgill-nlp.github.io/topiocqa/topiocqa_no_background.png">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style"
+    type="text/css" crossorigin>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+  <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+  <header class="page-header" role="banner" style="background-image: linear-gradient(120deg, #d7816a, #bd4f6c);">
+    <h2 class="project-name project-name-jekyll"><img src="topiocqa_no_background.png" alt="logo" width="100"
+        height="100" style="margin-bottom: -20px; vertical-align: unset;" />TopiOCQA: Open-domain Conversational
+      Question Answering with Topic Switching</h2>
+    <h2 class="project-tagline project-tagline-jekyll">Vaibhav Adlakha, Shehzaad Dhuliawala, Kaheer Suleman, Harm de
+      Vries, Siva Reddy</h2>
+    <a href="https://arxiv.org/abs/2110.00768" target='_blank' class="btn-jekyll">View paper on arXiv</a>
+    <a href="https://github.com/McGill-NLP/topiocqa" target='_blank' class="btn-jekyll">View code on GitHub</a>
+    <a href="https://zenodo.org/record/6193037/files/topiocqa.zip?download=1" class="btn-jekyll">Download dataset</a>
+    <a href="demo" class="btn-jekyll">Demo</a>
+  </header>
+
+  <main id="content" class="content" role="main">
+    <div class="container p-0">
+
+      <div class="card">
+        <div class="row g-0">
+          <div class="col-12 col-lg-6 col-xl-6 split-pane">
+
+            <div class="position-relative">
+              <div class="chat-messages p-4" id="chat">
+
+                <!-- <div class="chat-message-right mb-4">
+                  <div>
+                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1"
+                      alt="Chris Wood" width="40" height="40">
+                  </div>
+                  <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                    <div class="font-weight-bold mb-1">You</div>
+                    <span class="chat-message">Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te
+                      vix.</span>
+                  </div>
+                </div> -->
+
+                <!-- <div class="chat-message-left pb-4">
+                  <div>
+                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1"
+                      alt="Sharon Lessman" width="40" height="40">
+                  </div>
+                  <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                    <div class="font-weight-bold mb-1">Sharon Lessman</div>
+                    <span class="chat-message">Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal
+                      commodo.</span>
+                  </div>
+                </div> -->
+
+              </div>
+            </div>
+
+          </div>
+          <div class="col-12 col-lg-6 col-xl-6 split-pane">
+            <div class="chat-messages p-4", id="retrieved-docs">
+
+              <!-- <div class="chat-message-right pb-4 retrieved-doc">
+                <div class="flex-shrink-1 bg-light rounded py-2 px-3">
+                  <div class="font-weight-bold mb-1">Title: Doc 1</div>
+                  <div class="font-weight-bold mb-1">Section: Section 1</div>
+                  Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo. Sit meis deleniti eu,
+                  pri vidit meliore docendi ut, an eum erat animal commodo. Sit meis deleniti eu, pri vidit meliore
+                  docendi ut, an eum erat animal commodo. Sit meis deleniti eu, pri vidit meliore docendi ut, an eum
+                  erat animal commodo.
+                </div>
+              </div>
+              <div class="chat-message-right pb-4 retrieved-doc">
+                <div class="flex-shrink-1 bg-light rounded py-2 px-3">
+                  <div class="font-weight-bold mb-1">Title: Doc 1</div>
+                  <div class="font-weight-bold mb-1">Section: Section 1</div>
+                  Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo. Sit meis deleniti eu,
+                  pri vidit meliore docendi ut, an eum erat animal commodo. Sit meis deleniti eu, pri vidit meliore
+                  docendi ut, an eum erat animal commodo. Sit meis deleniti eu, pri vidit meliore docendi ut, an eum
+                  erat animal commodo.
+                </div>
+              </div> -->
+
+            </div>
+
+          </div>
+          <div class="col-12 col-lg-12 col-xl-12">
+            <div class="flex-grow-0 py-3 px-4 border-top">
+              <div class="input-group col-12 col-lg-6 col-xl-6">
+                <input type="text" class="form-control" id="text-input" placeholder="Type your message">
+                <button class="btn btn-primary" onclick="sendQuestion()">Send</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
