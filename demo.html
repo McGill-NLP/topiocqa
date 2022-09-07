@@ -159,6 +159,7 @@
     });
   });
   function sendQuestion() {
+    $('#send-text').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"> </span>Loading...');
     var question = $('#text-input').val();
     // console.log(question);
     var prevConv = [];
@@ -195,9 +196,11 @@
 
           $('#retrieved-docs').append('<div class="pb-4 retrieved-doc"><div class="flex-shrink-1 bg-light rounded py-2 px-3" style="width:100%"><div class="font-weight-bold mb-1">Title: ' + title + '</div><div class="font-weight-bold mb-1">Section: ' + section_title + '</div>' + body["passages"][i]["text"] + '</div></div>');
         }
+        $('#send-text').html('Send');
       },
       error: function (error) {
         console.log(error);
+        $('#send-text').html('Send');
       }
     });
   }
@@ -305,7 +308,9 @@
             <div class="flex-grow-0 py-3 px-4 border-top">
               <div class="input-group col-12 col-lg-6 col-xl-6">
                 <input type="text" class="form-control" id="text-input" placeholder="Type your message">
-                <button class="btn btn-primary" onclick="sendQuestion()">Send</button>
+                <button class="btn btn-primary" id="send-text" onclick="sendQuestion()">
+                  Send
+                </button>
               </div>
             </div>
           </div>
