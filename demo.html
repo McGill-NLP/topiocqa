@@ -145,6 +145,10 @@
   .split-pane {
     min-height: 40em;
   }
+
+  .retrieved-doc{
+    margin-left: 0px;
+  }
 </style>
 <script>
   $(document).ready(function() {
@@ -189,7 +193,7 @@
           var title = body["passages"][i]["title"].split(' [SEP] ')[0];
           var section_title = body["passages"][i]["title"].split(' [SEP] ')[1];
 
-          $('#retrieved-docs').append('<div class="chat-message-right pb-4 retrieved-doc"><div class="flex-shrink-1 bg-light rounded py-2 px-3"><div class="font-weight-bold mb-1">Title: ' + title + '</div><div class="font-weight-bold mb-1">Section: ' + section_title + '</div>' + body["passages"][i]["text"] + '</div></div>');
+          $('#retrieved-docs').append('<div class="pb-4 retrieved-doc"><div class="flex-shrink-1 bg-light rounded py-2 px-3" style="width:100%"><div class="font-weight-bold mb-1">Title: ' + title + '</div><div class="font-weight-bold mb-1">Section: ' + section_title + '</div>' + body["passages"][i]["text"] + '</div></div>');
         }
       },
       error: function (error) {
