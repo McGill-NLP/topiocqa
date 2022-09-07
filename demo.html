@@ -147,6 +147,13 @@
   }
 </style>
 <script>
+  $(document).ready(function() {
+    $("#text-input").on("keydown", function(e) { 
+      if(e.keyCode == 13){
+        sendQuestion();
+      }
+    });
+  });
   function sendQuestion() {
     var question = $('#text-input').val();
     // console.log(question);
