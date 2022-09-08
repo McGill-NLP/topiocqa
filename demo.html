@@ -25,6 +25,8 @@
     display: flex;
     flex-direction: column;
     max-height: 800px;
+    min-height: inherit;
+    height: 100%;
     overflow-y: scroll
   }
 
@@ -133,15 +135,6 @@
     height: 100%
   }
 
-  .chat-messages {
-    min-height: inherit;
-    height: 100%;
-  }
-
-  .card {
-    margin-top: 20px;
-  }
-
   .split-pane {
     min-height: 40em;
   }
@@ -158,6 +151,18 @@
       }
     });
   });
+
+  function clearLast () {
+    $("#chat .chat-message-right").last().remove()
+    $("#chat .chat-message-left").last().remove()
+    $('#retrieved-docs').html("");
+  }
+
+  function clearAll () {
+    $("#chat").html("");
+    $('#retrieved-docs').html("");
+  }
+
   function sendQuestion() {
     $('#send-text').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"> </span>Loading...');
     var question = $('#text-input').val();
@@ -185,8 +190,8 @@
         body = JSON.parse(response['body']);
         console.log(body);
         $('#text-input').val('');
-        $('#chat').append('<div class="chat-message-left pb-4"><div><img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="You" width="40" height="40"></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3"><div class="font-weight-bold mb-1">You</div><span class="chat-message">' + question + '</span></div></div>');
-        $('#chat').append('<div class="chat-message-right mb-4"><div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Bot" width="40" height="40"></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3"><div class="font-weight-bold mb-1">Bot</div><span class="chat-message">' + body["answer"] + '</span></div></div>');
+        $('#chat').append('<div class="chat-message-left pb-4"><div><img src="https://img.icons8.com/external-others-inmotus-design/67/000000/external-Avatar-round-icons-others-inmotus-design-3.png" class="rounded-circle mr-1" alt="You" width="40" height="40"></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3"><div class="font-weight-bold mb-1">You</div><span class="chat-message">' + question + '</span></div></div>');
+        $('#chat').append('<div class="chat-message-right mb-4"><div><img src="https://img.icons8.com/fluency/48/000000/bot.png" class="rounded-circle mr-1" alt="Bot" width="40" height="40"></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3"><div class="font-weight-bold mb-1">Bot</div><span class="chat-message">' + body["answer"] + '</span></div></div>');
         $('#chat').scrollTop($('#chat')[0].scrollHeight);
         const myNode = document.getElementById("retrieved-docs");
         myNode.textContent = '';
@@ -240,11 +245,25 @@
   </header>
 
   <main id="content" class="content" role="main">
-    <div class="container p-0">
+    <div class="container" style="padding-top: 20px">
+      <div class="row">
+        <div class="col-12 col-lg-6 col-xl-6" style="padding-right: 0px; border-right: 1px solid rgba(0,0,0,.125) ">
+          <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">Conversation</a>
+          </nav>
+        </div>
+        <div class="col-12 col-lg-6 col-xl-6" style="padding-left: 0px;">
+          <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">Retrieved Passages</a>
+          </nav>
+        </div>
+      </div>
 
       <div class="card">
+
         <div class="row g-0">
-          <div class="col-12 col-lg-6 col-xl-6 split-pane">
+          <div class="col-12 col-lg-6 col-xl-6 split-pane" style="padding-right: 0px; border-right: 1px solid rgba(0,0,0,.125)">
+            <!-- <div class="card-header" style="border:1px solid rgba(0,0,0,.125)">Conversation</div> -->
 
             <div class="position-relative">
               <div class="chat-messages p-4" id="chat">
@@ -253,7 +272,8 @@
             </div>
 
           </div>
-          <div class="col-12 col-lg-6 col-xl-6 split-pane">
+          <div class="col-12 col-lg-6 col-xl-6 split-pane" style="padding-left: 0px;">
+            <!-- <div class="card-header" style="border:1px solid rgba(0,0,0,.125)">Retrieved Passages</div> -->
             <div class="chat-messages p-4" , id="retrieved-docs">
 
             </div>
@@ -261,11 +281,21 @@
           </div>
           <div class="col-12 col-lg-12 col-xl-12">
             <div class="flex-grow-0 py-3 px-4 border-top">
-              <div class="input-group col-12 col-lg-6 col-xl-6">
-                <input type="text" class="form-control" id="text-input" placeholder="Type your message">
-                <button class="btn btn-primary" id="send-text" onclick="sendQuestion()">
-                  Send
-                </button>
+              <div class="row">
+                <div class="input-group col-12 col-lg-6 col-xl-6">
+                  <input type="text" class="form-control" id="text-input" placeholder="Type your message">
+                  <button class="btn btn-primary" id="send-text" onclick="sendQuestion()">
+                    Send
+                  </button>
+                </div>
+                <div class=" col-12 col-lg-6 col-xl-6">
+                  <button class="btn btn-warning" onclick="clearLast()">
+                    Remove Last
+                  </button>
+                  <button class="btn btn-danger" onclick="clearAll()">
+                    Clear All
+                  </button>
+                </div>
               </div>
             </div>
           </div>
