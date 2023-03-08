@@ -19,6 +19,16 @@ from typing import Tuple
 logger = logging.getLogger(__name__)
 
 RESOURCES_MAP = {
+    "data.topiocqa_dataset.train": {
+        "url": "https://zenodo.org/record/7709644/files/topiocqa_train.json",
+        "original_ext": ".json",
+        "desc": "TopicQA train data",
+    },
+    "data.topiocqa_dataset.dev": {
+        "url": "https://zenodo.org/record/7709644/files/topiocqa_dev.json",
+        "original_ext": ".json",
+        "desc": "TopicQA development data",
+    },
     "data.wikipedia_split.full_wiki": {
         "url": "https://zenodo.org/record/6173228/files/data/wikipedia_split/full_wiki.jsonl",
         "original_ext": ".jsonl",
