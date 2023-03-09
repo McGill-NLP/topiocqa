@@ -113,11 +113,13 @@ class TopiOCQAEvaluator():
         a_gold_list = self.gold_data[key]
         return TopiOCQAEvaluator._compute_turn_score(a_gold_list, a_pred)
 
-    def get_raw_scores(self, pred_data):
+    def get_raw_scores(self, pred_data, turn_indices=None):
         ''''Returns a dict with score with each turn prediction'''
         exact_scores = {}
         f1_scores = {}
         for conv_id, turn_id in self.gold_data:
+            if turn_indices is not None and turn_id not in turn_indices:
+                continue
             key = (conv_id, turn_id)
             if key not in pred_data:
                 sys.stderr.write(
@@ -130,11 +132,13 @@ class TopiOCQAEvaluator():
             f1_scores[key] = scores['f1']
         return exact_scores, f1_scores
 
-    def get_raw_scores_human(self):
+    def get_raw_scores_human(self, turn_indices=None):
         ''''Returns a dict with score for each turn'''
         exact_scores = {}
         f1_scores = {}
         for conv_id, turn_id in self.gold_data:
+            if turn_indices is not None and turn_id not in turn_indices:
+                continue
             key = (conv_id, turn_id)
             f1_sum = 0.0
             em_sum = 0.0
@@ -154,18 +158,20 @@ class TopiOCQAEvaluator():
             f1_scores[key] = f1_sum / len(self.gold_data[key])
         return exact_scores, f1_scores
 
-    def human_performance(self):
-        exact_scores, f1_scores = self.get_raw_scores_human()
-        return self.aggregate_scores(exact_scores, f1_scores)
+    def human_performance(self, turn_indices=None):
+        exact_scores, f1_scores = self.get_raw_scores_human(turn_indices=turn_indices)
+        return self.aggregate_scores(exact_scores, f1_scores, turn_indices=turn_indices)
 
-    def model_performance(self, pred_data):
-        exact_scores, f1_scores = self.get_raw_scores(pred_data)
-        return self.aggregate_scores(exact_scores, f1_scores)
+    def model_performance(self, pred_data, turn_indices=None):
+        exact_scores, f1_scores = self.get_raw_scores(pred_data, turn_indices=turn_indices)
+        return self.aggregate_scores(exact_scores, f1_scores, turn_indices=turn_indices)
 
-    def aggregate_scores(self, exact_scores, f1_scores):
+    def aggregate_scores(self, exact_scores, f1_scores, turn_indices=None):
 
         final_scores = {'em_total': 0.0, 'f1_total': 0.0, 'turns': 0}
         for conv_id, turn_id in self.gold_data:
+            if turn_indices is not None and turn_id not in turn_indices:
+                continue
             key = (conv_id, turn_id)
             final_scores['em_total'] += exact_scores.get(key, 0)
             final_scores['f1_total'] += f1_scores.get(key, 0)
