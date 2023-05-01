@@ -210,6 +210,19 @@ class Collator(object):
 
         return (index, target_ids, target_mask, passage_ids, passage_masks)
 
+class MinimalCollator(object):
+    def __init__(self, text_maxlength, tokenizer):
+        self.tokenizer = tokenizer
+        self.text_maxlength = text_maxlength
+
+    def __call__(self, batch):
+        text_passages = [example['passages'] for example in batch]
+        passage_ids, passage_masks = encode_passages(text_passages,
+                                                     self.tokenizer,
+                                                     self.text_maxlength)
+        
+        return passage_ids, passage_masks
+
 def load_data(data_path=None, gold_data_path=None, n_context=-1, global_rank=-1, world_size=-1):
     assert data_path
     if data_path.endswith('.jsonl'):

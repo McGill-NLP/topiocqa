@@ -101,7 +101,7 @@ def generate_question_vectors(
                 logger.info("Encoded queries %d", len(query_vectors))
 
     query_tensor = torch.cat(query_vectors, dim=0)
-    logger.info("Total encoded queries tensor %s", query_tensor.size())
+    # logger.info("Total encoded queries tensor %s", query_tensor.size())
     assert query_tensor.size(0) == len(questions)
     return query_tensor
 
@@ -180,8 +180,8 @@ class LocalFaissRetriever(DenseRetriever):
         """
         time0 = time.time()
         results = self.index.search_knn(query_vectors, top_docs)
-        logger.info("index search time: %f sec.", time.time() - time0)
-        self.index = None
+        # logger.info("index search time: %f sec.", time.time() - time0)
+        # self.index = None
         return results
 
 
