@@ -30,12 +30,12 @@ RESOURCES_MAP = {
         "desc": "TopicQA development data",
     },
     "data.wikipedia_split.full_wiki": {
-        "url": "https://zenodo.org/record/6173228/files/data/wikipedia_split/full_wiki.jsonl",
+        "url": "https://zenodo.org/records/6173228/files/data/wikipedia_split/full_wiki.jsonl",
         "original_ext": ".jsonl",
         "desc": "Entire wikipedia corpus",
     },
     "data.wikipedia_split.full_wiki_segments": {
-        "url": "https://zenodo.org/record/6149599/files/data/wikipedia_split/full_wiki_segments.tsv",
+        "url": "https://zenodo.org/records/6149599/files/data/wikipedia_split/full_wiki_segments.tsv",
         "original_ext": ".tsv",
         "desc": "Entire wikipedia passages set obtain by splitting all pages into 200-word segments (no overlap)"
     },
